@@ -1,0 +1,28 @@
+{
+  "name": "ui",
+  "version": "0.0.0",
+  "description": "Generic, design-system UI components (no business logic) for BehindTheMusicTree React apps",
+  "private": true,
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/BehindTheMusicTree/ui.git"
+  },
+  "packageManager": "pnpm@11.5.2+sha512.71c631e382066efc25625d5cf029075de07b61b37f6e27350fbd84b1bda5864c8c1967adc280776b45c30a715c0359a3be08fef42d5bb09e2b99029979692916",
+  "scripts": {
+    "dev": "turbo run dev",
+    "build": "turbo run build",
+    "lint": "turbo run lint",
+    "test": "turbo run test",
+    "release": "bash scripts/release.sh"
+  },
+  "keywords": [
+    "react",
+    "ui",
+    "design-system"
+  ],
+  "author": "Andreas Garcia",
+  "license": "ISC",
+  "devDependencies": {
+    "turbo": "^2.10.8"
+  }
+}
