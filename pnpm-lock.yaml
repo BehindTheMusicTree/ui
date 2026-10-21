@@ -70,6 +70,9 @@ importers:
         specifier: ^3.2.0
         version: 3.6.0
     devDependencies:
+      '@behindthemusictree/brand':
+        specifier: ^12.0.0
+        version: 12.0.0(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       '@types/react':
         specifier: ^18.2.0
         version: 18.3.31
@@ -177,6 +180,12 @@ packages:
   '@babel/types@7.29.8':
     resolution: {integrity: sha512-Vj1jF3cPfxg7OAfoI7QnVKLoILlm2JF9pnVHrX8qx7AHMiYWT+NDAA7jChlNgRS4WTLc/fD1lXLmPixluj+3Gg==}
     engines: {node: '>=6.9.0'}
+
+  '@behindthemusictree/brand@12.0.0':
+    resolution: {integrity: sha512-9PrERlo0lHyB3dtSQJYg4XvrM1Pm8sZ6MO0zV/lO/8UBLMNtm3QDTnuWwNW5z8dQhPD3h0Hx8N0W373C69CzDQ==, tarball: https://npm.pkg.github.com/download/@behindthemusictree/brand/12.0.0/aeba06e0b62328472fafecd16f9c1938af05e00f}
+    peerDependencies:
+      react: '>=18.0.0'
+      react-dom: '>=18.0.0'
 
   '@esbuild/aix-ppc64@0.21.5':
     resolution: {integrity: sha512-1SDgH6ZSPTlggy1yI6+Dbkiz8xzpHJEVAlF/AM1tHPLsf5STom9rwtjE4hKAF20FfXXNTFqEYXyJNWh1GiZedQ==}
@@ -1369,6 +1378,11 @@ snapshots:
     dependencies:
       '@babel/helper-string-parser': 7.29.7
       '@babel/helper-validator-identifier': 7.29.7
+
+  '@behindthemusictree/brand@12.0.0(react-dom@18.3.1(react@18.3.1))(react@18.3.1)':
+    dependencies:
+      react: 18.3.1
+      react-dom: 18.3.1(react@18.3.1)
 
   '@esbuild/aix-ppc64@0.21.5':
     optional: true
