@@ -9,6 +9,12 @@ Format based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 - **Dev tooling**: Added a `launch` Claude Code skill (`.claude/skills/launch/`) documenting how to start the local dev environment.
 
+## [0.2.0] - 2026-10-21
+
+### Added
+
+- **Peer dependency**: `@behindthemusictree/brand` (`^12.0.0`) is now declared as an optional peer dependency, making the existing reliance on its CSS variables explicit. The README lists the variables read.
+
 ## [0.1.0] - 2026-08-14
 
 ### Added
