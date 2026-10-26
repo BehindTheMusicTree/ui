@@ -1,6 +1,6 @@
 {
   "name": "@behindthemusictree/ui",
-  "version": "0.3.0",
+  "version": "0.4.0",
   "description": "Generic, business-logic-free UI components for BehindTheMusicTree React apps",
   "repository": {
     "type": "git",
