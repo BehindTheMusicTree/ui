@@ -7,7 +7,13 @@ Format based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 ### Added
 
+- **`IconButton`**: round icon-only button (`sm` 24px, `md` 32px) with a required `aria-label`.
+- **`SegmentedControl`**: single-choice toggle group (`aria-pressed` buttons) for view-mode switches.
 - **Dev tooling**: Added a `launch` Claude Code skill (`.claude/skills/launch/`) documenting how to start the local dev environment.
+
+### Changed
+
+- `Input`, `Skeleton` and `RingLoader` read brand tokens (`--color-surface`, `--color-border`, `--color-text*`, `--color-focus-ring`, `--color-primary`) instead of unresolved shadcn classes or dark-surface colors; `Button`'s focus ring uses `--color-focus-ring`. Requires the semantic tokens from `@behindthemusictree/brand` after 12.0.0.
 
 ## [0.2.0] - 2026-10-21
 

@@ -4,6 +4,8 @@ export * from "./Skeleton";
 export * from "./Input";
 export * from "./Button";
 export * from "./IconTextButton";
+export * from "./IconButton";
+export * from "./SegmentedControl";
 export { default as Pagination } from "./Pagination";
 export { default as RingLoader } from "./RingLoader";
 export { default as UploadButtons } from "./UploadButtons";
