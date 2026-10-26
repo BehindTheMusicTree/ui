@@ -7,6 +7,8 @@ export interface SegmentedControlOption<T extends string> {
   value: T;
   label: ReactNode;
   "aria-label"?: string;
+  disabled?: boolean;
+  title?: string;
 }
 
 export interface SegmentedControlProps<T extends string> {
@@ -41,12 +43,14 @@ export function SegmentedControl<T extends string>({
             type="button"
             aria-pressed={selected}
             aria-label={option["aria-label"]}
+            disabled={option.disabled}
+            title={option.title}
             onClick={() => onChange(option.value)}
             className={cn(
-              "rounded px-3 py-1 text-sm transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-focus-ring)]",
+              "rounded px-3 py-1 text-sm transition-colors duration-200 disabled:cursor-not-allowed disabled:opacity-50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-focus-ring)]",
               selected
                 ? "bg-[var(--color-surface)] font-medium text-[var(--color-text)] shadow-sm"
-                : "text-[var(--color-text-muted)] hover:text-[var(--color-text)]",
+                : "text-[var(--color-text-muted)] enabled:hover:text-[var(--color-text)]",
             )}
           >
             {option.label}
