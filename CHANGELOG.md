@@ -5,6 +5,8 @@ Format based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 ## [Unreleased]
 
+## [0.5.0] - 2026-10-28
+
 ### Added
 
 - **`PanelSection`**: collapsible detail-panel section (padded, divided, uppercase muted title toggle with `aria-expanded`), matching genre-tree-view's info-panel sections.
