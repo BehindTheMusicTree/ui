@@ -9,7 +9,7 @@ layer can be versioned independently from `app-kit`'s auth/transport/player/genr
 See [`packages/ui`](packages/ui). Published to GitHub Packages as `@behindthemusictree/ui`:
 
 ```tsx
-import { Button, Input, Table, Skeleton, Pagination, RingLoader, IconTextButton, UploadButtons, cn } from "@behindthemusictree/ui";
+import { Button, Input, Table, Skeleton, Pagination, RingLoader, IconTextButton, UploadButtons, PanelSection, FieldList, Chip, cn } from "@behindthemusictree/ui";
 ```
 
 This package contains **only** generic, stateless-or-self-contained UI components — no auth,
