@@ -7,6 +7,7 @@ export * from "./IconTextButton";
 export * from "./IconButton";
 export * from "./SegmentedControl";
 export * from "./PanelSection";
+export * from "./PanelGroup";
 export * from "./FieldList";
 export * from "./Chip";
 export { default as Pagination } from "./Pagination";

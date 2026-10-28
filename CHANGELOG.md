@@ -5,6 +5,14 @@ Format based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 ## [Unreleased]
 
+### Added
+
+- `PanelGroup`: a titled group inside a `PanelSection` (e.g. Albums, Live).
+
+### Changed
+
+- Containers own their separators: `PanelSection` no longer draws its own top border (the panel holding it does), and `PanelSection` and `FieldList` draw a divider between their children (groups, fields).
+
 ## [0.6.0] - 2026-10-28
 
 ### Changed

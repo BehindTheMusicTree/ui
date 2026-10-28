@@ -15,7 +15,7 @@ export function PanelSection({ title, children, defaultOpen = true, className }:
   const [open, setOpen] = useState(defaultOpen);
   const contentId = useId();
   return (
-    <section className={cn("px-6 pb-2.5 border-t border-[var(--color-border)]", className)}>
+    <section className={cn("px-6 pb-2.5", className)}>
       <h3 className="mt-2.5">
         <button
           type="button"
@@ -32,7 +32,7 @@ export function PanelSection({ title, children, defaultOpen = true, className }:
         </button>
       </h3>
       {open && (
-        <div id={contentId} className="mt-1.5">
+        <div id={contentId} className="mt-1.5 divide-y divide-[var(--color-border)]">
           {children}
         </div>
       )}
