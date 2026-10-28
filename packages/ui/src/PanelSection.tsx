@@ -15,7 +15,7 @@ export function PanelSection({ title, children, defaultOpen = true, className }:
   const [open, setOpen] = useState(defaultOpen);
   const contentId = useId();
   return (
-    <section className={cn("px-6 pb-2.5 border-t border-[var(--color-border)] first:border-t-0", className)}>
+    <section className={cn("px-6 pb-2.5 border-t border-[var(--color-border)]", className)}>
       <h3 className="mt-2.5">
         <button
           type="button"

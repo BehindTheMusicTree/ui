@@ -5,6 +5,10 @@ Format based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 ## [Unreleased]
 
+### Changed
+
+- `PanelSection` always draws its top divider, matching the genre panel's sections. Dropping it on a first child left a section without a divider when a panel stacks its main and extra content.
+
 ## [0.5.0] - 2026-10-28
 
 ### Added
