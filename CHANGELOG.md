@@ -5,6 +5,8 @@ Format based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 ## [Unreleased]
 
+## [0.10.0] - 2026-10-29
+
 ### Added
 
 - `ZoomControls`: zoom in / zoom out / fit-to-frame button cluster, vertical or horizontal, with an optional `leading` slot.
