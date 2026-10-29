@@ -5,6 +5,11 @@ Format based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 ## [Unreleased]
 
+### Added
+
+- `ZoomControls`: zoom in / zoom out / fit-to-frame button cluster, vertical or horizontal, with an optional `leading` slot.
+- `DetailPanel`: floating side panel (title, close, scrolling body) sized by the brand layout tokens, with a `collapsed` slide-out.
+
 ## [0.9.0] - 2026-10-29
 
 ### Changed
