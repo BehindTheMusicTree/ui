@@ -5,6 +5,8 @@ Format based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 ## [Unreleased]
 
+## [0.9.0] - 2026-10-29
+
 ### Changed
 
 - Touch targets on coarse pointers (`@media (pointer: coarse)`): `Button` (every size, so `IconTextButton` too), `IconButton`, `SegmentedControl` options and `Input` grow to `--layout-touch-target` (44px); `Chip` keeps its look but gets a 44px-tall hit area. `Input` also switches to `text-base` there so iOS doesn't zoom on focus. `SegmentedControl` scrolls horizontally instead of overflowing when its options don't fit. Desktop sizes are unchanged.
