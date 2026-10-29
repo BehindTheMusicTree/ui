@@ -5,6 +5,8 @@ Format based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 ## [Unreleased]
 
+## [0.8.0] - 2026-10-29
+
 ### Added
 
 - `Avatar`: round initials badge on green, with `getInitials(label)` (name or email → up to two letters).
