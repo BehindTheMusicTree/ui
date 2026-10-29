@@ -20,9 +20,9 @@ on this package rather than the other way around.
 Components are styled with Tailwind utility classes referencing CSS custom properties
 (`--color-*`, `--space-*`, `--radius-*`). **Consumers must also load
 `@behindthemusictree/brand`'s `tokens/theme.css`** — this package does not ship or import it.
-`brand` is an optional peer dependency (`^12.0.0`): the app installs and owns its version. Outside
+`brand` is an optional peer dependency (`^12.7.0`): the app installs and owns its version. Outside
 BTMT, define the variables yourself instead; the ones currently read are `--color-primary`,
-`--color-neutral-{100,200,300,700}`, `--color-red-{600,700}` and `--color-green-600`.
+`--color-neutral-{100,200,300,700}`, `--color-red-{600,700}`, `--color-green-600` and, on touch screens, `--layout-touch-target`.
 
 ## Development
 

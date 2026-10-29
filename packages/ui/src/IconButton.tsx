@@ -9,8 +9,8 @@ const iconButtonVariants = cva(
   {
     variants: {
       size: {
-        sm: "h-6 w-6",
-        md: "h-8 w-8",
+        sm: "h-6 w-6 [@media(pointer:coarse)]:h-[var(--layout-touch-target)] [@media(pointer:coarse)]:w-[var(--layout-touch-target)]",
+        md: "h-8 w-8 [@media(pointer:coarse)]:h-[var(--layout-touch-target)] [@media(pointer:coarse)]:w-[var(--layout-touch-target)]",
       },
     },
     defaultVariants: { size: "md" },
