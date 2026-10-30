@@ -6,7 +6,7 @@ layer can be versioned independently from `app-kit`'s auth/transport/player/genr
 
 ## Package
 
-See [`packages/ui`](packages/ui). Published to GitHub Packages as `@behindthemusictree/ui`:
+See [`packages/ui`](packages/ui). Published to npm as `@behindthemusictree/ui`:
 
 ```tsx
 import { Button, Input, Table, Skeleton, Pagination, RingLoader, IconTextButton, UploadButtons, PanelSection, FieldList, Chip, cn } from "@behindthemusictree/ui";
@@ -40,7 +40,7 @@ pnpm release -- patch   # or minor / major
 ```
 
 Bumps the package version, moves `CHANGELOG.md`'s `[Unreleased]` section under the new version,
-tags, and pushes — which triggers `.github/workflows/publish.yml` to build and publish to GitHub
-Packages.
+tags, and pushes — which triggers `.github/workflows/publish.yml` to stage the version on npm;
+an npm owner then approves it with 2FA (`npm stage approve`).
 
 See [CONTRIBUTING.md](CONTRIBUTING.md) for the full workflow.
