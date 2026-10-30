@@ -182,7 +182,7 @@ packages:
     engines: {node: '>=6.9.0'}
 
   '@behindthemusictree/brand@12.7.0':
-    resolution: {integrity: sha512-IgzmWaDgukuyg2e6sldxIRBPBaeSrqVUfvGcQShSDp7CopY5P4cmKHWX1rHl8V9n7LNJZeoSRqUcY9hafnNkXA==, tarball: https://npm.pkg.github.com/download/@behindthemusictree/brand/12.7.0/f8ec62a929c9fd82b663f4950bd331be629f2d0d}
+    resolution: {integrity: sha512-k80mk5+yEyyKLv1Ac4ccZxC+32BYrI7BQ3aRZwecmLtjhrJhTdPVC0vdXjM5qOCa/eDsDTn47miXv07sMCGEQg==}
     peerDependencies:
       react: '>=18.0.0'
       react-dom: '>=18.0.0'

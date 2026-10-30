@@ -52,4 +52,6 @@ git push --follow-tags
 
 echo ""
 echo "Released v$NEW_VERSION ($OLD_VERSION -> $NEW_VERSION)"
-echo "Publishing to GitHub Packages will start automatically."
+echo "The publish workflow will stage it on npm. Then approve it with 2FA (it goes live only after this):"
+echo "  npm stage list @behindthemusictree/ui --registry https://registry.npmjs.org"
+echo "  npm stage approve <stage-id> --registry https://registry.npmjs.org"

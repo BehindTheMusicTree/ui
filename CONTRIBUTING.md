@@ -26,7 +26,7 @@ radius, so please keep that in mind.
 improve documentation, and participate in discussions.
 
 **Maintainers** review and merge pull requests, cut releases, and manage the publish workflow
-(`.github/workflows/publish.yml`, which holds the `NPM_TOKEN` used to publish to GitHub Packages).
+(`.github/workflows/publish.yml`, which stages each version on npm via trusted publishing — no token — for a maintainer to approve with 2FA).
 
 ## Development Workflow
 
@@ -104,8 +104,11 @@ pnpm release -- patch   # or minor / major
 
 This bumps `packages/ui/package.json`'s version, moves the `CHANGELOG.md` `[Unreleased]` section
 under the new version heading, commits, tags (`vX.Y.Z`), and pushes — which triggers
-`.github/workflows/publish.yml` to build and publish `@behindthemusictree/ui` to GitHub Packages.
-Must be run from a clean `main` branch.
+`.github/workflows/publish.yml` to build `@behindthemusictree/ui` and stage it on npm (trusted
+publishing, with provenance). The version goes live only once an npm owner approves it with 2FA:
+`npm stage list @behindthemusictree/ui`, then `npm stage approve <stage-id>` (pass
+`--registry https://registry.npmjs.org` if your `~/.npmrc` maps the scope elsewhere). Must be run
+from a clean `main` branch.
 
 ## License & Attribution
 
