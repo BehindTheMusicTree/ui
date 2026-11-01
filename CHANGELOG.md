@@ -5,6 +5,10 @@ Format based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 ## [Unreleased]
 
+### Changed
+
+- Share project and playground guidance across Claude and Codex, with CI checking adapter consistency.
+
 ## [0.10.1] - 2026-10-30
 
 ### Changed

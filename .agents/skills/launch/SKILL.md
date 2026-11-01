@@ -38,6 +38,6 @@ it live, edits to `packages/ui` source should hot-reload into the playground wit
 restarting anything.
 
 Note: this package does not ship `@behindthemusictree/brand`'s `tokens/theme.css` —
-if playground styling looks off, check that the playground itself imports the design
-tokens (see `apps/playground/src`), since `packages/ui` components only reference the
-CSS custom properties, they don't define them.
+the current playground does not import the brand tokens. If styling looks off,
+check its CSS and the consumer's token setup; `packages/ui` references CSS custom
+properties rather than defining them.
