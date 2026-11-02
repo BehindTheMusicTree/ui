@@ -24,7 +24,7 @@ export function ZoomControls({
   onFit,
   canZoomIn = true,
   canZoomOut = true,
-  orientation = "vertical",
+  orientation = "horizontal",
   leading,
   className,
 }: ZoomControlsProps) {
