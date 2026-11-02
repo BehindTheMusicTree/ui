@@ -5,6 +5,10 @@ Format based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 ## [Unreleased]
 
+### Changed
+
+- Publish workflow: publish directly with `npm publish` instead of staging, so releases need no manual 2FA approval.
+
 ## [0.11.0] - 2026-11-02
 
 ### Changed
