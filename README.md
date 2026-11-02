@@ -40,7 +40,6 @@ pnpm release -- patch   # or minor / major
 ```
 
 Bumps the package version, moves `CHANGELOG.md`'s `[Unreleased]` section under the new version,
-tags, and pushes — which triggers `.github/workflows/publish.yml` to stage the version on npm;
-an npm owner then approves it with 2FA (`npm stage approve`).
+tags, and pushes — which triggers `.github/workflows/publish.yml` to publish the version on npm.
 
 See [CONTRIBUTING.md](CONTRIBUTING.md) for the full workflow.
