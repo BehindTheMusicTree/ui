@@ -19,3 +19,5 @@ export { default as UploadButtons } from "./UploadButtons";
 export type { UploadButtonsProps } from "./UploadButtons";
 export * from "./label-layout";
 export * from "./Combobox";
+export * from "./PanelEdgeTab";
+export * from "./useObscuredInset";

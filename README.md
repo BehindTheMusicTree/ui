@@ -9,7 +9,7 @@ layer can be versioned independently from `app-kit`'s auth/transport/player/genr
 See [`packages/ui`](packages/ui). Published to npm as `@behindthemusictree/ui`:
 
 ```tsx
-import { Button, Input, Table, Skeleton, Pagination, RingLoader, IconTextButton, UploadButtons, PanelSection, FieldList, Chip, cn } from "@behindthemusictree/ui";
+import { Button, Input, Table, Skeleton, Pagination, RingLoader, IconTextButton, UploadButtons, PanelSection, DetailPanel, PanelEdgeTab, useObscuredInset, FieldList, Chip, cn } from "@behindthemusictree/ui";
 ```
 
 This package contains **only** generic, stateless-or-self-contained UI components — no auth,
@@ -22,7 +22,7 @@ Components are styled with Tailwind utility classes referencing CSS custom prope
 `@behindthemusictree/brand`'s `tokens/theme.css`** — this package does not ship or import it.
 `brand` is an optional peer dependency (`^12.7.0`): the app installs and owns its version. Outside
 BTMT, define the variables yourself instead; the ones currently read are `--color-primary`,
-`--color-neutral-{100,200,300,700}`, `--color-red-{600,700}`, `--color-green-600` and, on touch screens, `--layout-touch-target`.
+`--color-neutral-{100,200,300,700}`, `--color-red-{600,700}`, `--color-green-600` and, on touch screens, `--layout-touch-target`. `DetailPanel` also reads the `--layout-*` panel tokens (`--layout-panel-edge`, `--layout-sheet-peek`, `--layout-panel-aside-w`, `--layout-center-*`), which need brand ≥ 12.10.
 
 ## Development
 

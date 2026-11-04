@@ -5,6 +5,16 @@ Format based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 ## [Unreleased]
 
+### Added
+
+- `DetailPanel` is now the single detail-panel shell: `headerStart`, `headerAccent`, `hideClose`, `hideTitle`, `expanded` + `aside` (two scrolling columns), `edgeTab`, `sheet` (bottom sheet with drag handle below `md`), `closeOnEscape` (leaves expanded mode first), `forwardRef` and `aria-labelledby`. The collapse transform moves the edge tab with the panel.
+- `PanelEdgeTab` (moved here from app-kit-ui) and `useObscuredInset(ref)`, which reports how many px of the canvas a panel currently covers.
+- Vitest, Testing Library and happy-dom; `pnpm test` now runs a suite.
+
+### Changed
+
+- `DetailPanel` positions itself with `--layout-panel-edge` (brand ≥ 12.10) instead of `--layout-gutter`.
+
 ## [0.14.0] - 2026-11-04
 
 ### Added
