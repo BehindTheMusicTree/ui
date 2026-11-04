@@ -5,6 +5,8 @@ Format based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 ## [Unreleased]
 
+## [0.12.0] - 2026-11-04
+
 ### Added
 
 - `label-layout`: headless, DOM-free helpers for zoomable chart labels — `logScalePosition`, `isRankShownAtZoom`, `dotLabelCandidates` and a greedy collision-culling `placeLabels` — so views share one label mechanic and keep their own ranking policy.
