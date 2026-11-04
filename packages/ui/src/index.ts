@@ -17,3 +17,4 @@ export { default as Pagination } from "./Pagination";
 export { default as RingLoader } from "./RingLoader";
 export { default as UploadButtons } from "./UploadButtons";
 export type { UploadButtonsProps } from "./UploadButtons";
+export * from "./label-layout";
