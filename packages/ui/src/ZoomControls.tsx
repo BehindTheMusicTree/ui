@@ -3,6 +3,7 @@
 import { ReactNode } from "react";
 import { Maximize, ZoomIn, ZoomOut } from "lucide-react";
 import { cn } from "./class-name";
+import { floatingControlCardClassName } from "./floating-control";
 import { IconButton } from "./IconButton";
 
 export interface ZoomControlsProps {
@@ -33,7 +34,8 @@ export function ZoomControls({
       role="group"
       aria-label="Zoom controls"
       className={cn(
-        "flex w-fit gap-0.5 rounded-lg border border-[var(--color-border)] bg-[var(--color-surface)] p-[0.1875rem] drop-shadow-[0_2px_6px_rgba(24,24,27,0.16)]",
+        "flex w-fit gap-0.5",
+        floatingControlCardClassName,
         orientation === "vertical" ? "flex-col" : "flex-row",
         className,
       )}
