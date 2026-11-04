@@ -83,6 +83,7 @@ export function Combobox({
   const handleKeyDown = (event: KeyboardEvent<HTMLInputElement>) => {
     if (event.key === "Escape") {
       onOpenChange(false);
+      setActive(0);
       return;
     }
     if (!open && (event.key === "ArrowDown" || event.key === "ArrowUp") && hasOptions) {
@@ -145,6 +146,8 @@ export function Combobox({
       </div>
       {expanded && (
         <div
+          // Keeps focus on the input when the scrollbar or footer is pressed, so the list does not close before the click lands.
+          onMouseDown={(event) => event.preventDefault()}
           className={cn(
             "absolute top-full z-10 mt-1 w-full rounded-md border border-[var(--color-border)] bg-[var(--color-surface)] shadow-lg",
             className
@@ -157,13 +160,13 @@ export function Combobox({
             aria-busy={Boolean(loading)}
             onScroll={(event) => {
               const list = event.currentTarget;
-              if (list.scrollHeight - list.scrollTop - list.clientHeight < 24) onLoadMore?.();
+              if (canLoadMore && !loading && list.scrollHeight - list.scrollTop - list.clientHeight < 24) onLoadMore?.();
             }}
             className={cn("max-h-80 overflow-y-auto py-1", listClassName)}
           >
-            {groups.map((group) => {
+            {groups.map((group, groupIndex) => {
               if (group.options.length === 0) return null;
-              const labelId = `${id}-group-${group.key}`;
+              const labelId = `${id}-group-${groupIndex}`;
               const start = offset;
               offset += group.options.length;
               return (
