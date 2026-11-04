@@ -5,6 +5,10 @@ Format based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 ## [Unreleased]
 
+### Added
+
+- `SegmentedControl` `variant="floating"`: icon-only square cells in the same card as `ZoomControls`, so controls floated side by side over a canvas share one height. Both now take their chrome from a shared `floating-control` module.
+
 ## [0.12.0] - 2026-11-04
 
 ### Added
