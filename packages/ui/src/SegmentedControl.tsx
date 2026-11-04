@@ -19,7 +19,8 @@ export interface SegmentedControlProps<T extends string> {
   "aria-label": string;
   /**
    * `floating` renders icon-only square cells in the same card as `ZoomControls`, so both
-   * have identical height when placed side by side over a canvas.
+   * have identical height when placed side by side over a canvas. Each option needs an
+   * `aria-label` since it has no visible text.
    */
   variant?: "default" | "floating";
   className?: string;
@@ -64,9 +65,14 @@ export function SegmentedControl<T extends string>({
               selected
                 ? cn(
                     "text-[var(--color-text)]",
-                    floating ? "bg-[var(--color-surface-muted)]" : "bg-[var(--color-surface)] font-medium shadow-sm",
+                    floating
+                      ? "bg-[var(--color-surface-muted)] ring-1 ring-inset ring-[var(--color-border)]"
+                      : "bg-[var(--color-surface)] font-medium shadow-sm",
                   )
-                : "text-[var(--color-text-muted)] enabled:hover:text-[var(--color-text)]",
+                : cn(
+                    "text-[var(--color-text-muted)] enabled:hover:text-[var(--color-text)]",
+                    floating && "enabled:hover:bg-[var(--color-surface-muted)]",
+                  ),
             )}
           >
             {option.label}
