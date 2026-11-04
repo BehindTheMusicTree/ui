@@ -5,6 +5,10 @@ Format based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 ## [Unreleased]
 
+### Added
+
+- `Combobox`: keyboard-accessible ARIA combobox with labelled option groups (Arrow keys, Home/End, Enter, Escape; picks on mouse-down), a live `status` line, `loading` and `empty` slots, and optional `onLoadMore`.
+
 ## [0.13.0] - 2026-11-04
 
 ### Added
