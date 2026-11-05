@@ -6,7 +6,7 @@
 const CONTRAST_CROSSOVER_LUMINANCE = Math.sqrt(1.05 * 0.05) - 0.05;
 
 /** Visible halo thickness per unit of font size. */
-export const LABEL_HALO_WIDTH_RATIO = 0.1;
+export const LABEL_HALO_WIDTH_RATIO = 0.08;
 
 const HEX_COLOR = /^#([0-9a-f]{3}|[0-9a-f]{6})$/i;
 
