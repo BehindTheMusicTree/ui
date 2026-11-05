@@ -9,6 +9,7 @@ export * from "./Avatar";
 export * from "./SegmentedControl";
 export * from "./PanelSection";
 export * from "./ZoomControls";
+export * from "./Breadcrumb";
 export * from "./DetailPanel";
 export * from "./PanelGroup";
 export * from "./FieldList";

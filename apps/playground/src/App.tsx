@@ -13,6 +13,7 @@ import {
   RingLoader,
   Pagination,
   DetailPanel,
+  Breadcrumb,
   PanelSection,
   useObscuredInset,
 } from "@behindthemusictree/ui";
@@ -62,6 +63,25 @@ function DetailPanelDemo() {
   );
 }
 
+function BreadcrumbDemo() {
+  const path = ["Rock", "Punk", "Hardcore", "Crust", "D-beat"];
+  const [depth, setDepth] = useState(path.length);
+  const items = path.slice(0, depth).map((name) => ({ id: name, label: name }));
+  return (
+    <section className="relative h-24 rounded-lg bg-gray-100">
+      {depth > 0 && (
+        <Breadcrumb
+          className="absolute left-1/2 top-3 max-w-[calc(100%-24px)] -translate-x-1/2"
+          home={{ label: "All genres", onSelect: () => setDepth(0) }}
+          items={items}
+          onSelect={(id) => setDepth(path.indexOf(id) + 1)}
+          onSelectCurrent={() => setDepth(path.length)}
+        />
+      )}
+    </section>
+  );
+}
+
 export function App() {
   const [page, setPage] = useState(1);
 
@@ -101,6 +121,8 @@ export function App() {
         <Skeleton className="h-8 w-32" />
         <RingLoader />
       </section>
+
+      <BreadcrumbDemo />
 
       <DetailPanelDemo />
 
