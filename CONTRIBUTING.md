@@ -78,10 +78,10 @@ genre...) code. If a component needs that kind of dependency, it belongs in
 ```bash
 pnpm build   # tsup: ESM + CJS + .d.ts
 pnpm lint    # tsc --noEmit across the workspace
+pnpm test    # Vitest component tests
 ```
 
-Both must pass before opening a PR. There is no test suite yet — until one exists, `pnpm build`
-(which runs the DTS build) is the primary type-safety check.
+All must pass before opening a PR. Release preparation and recovery fixtures also run in CI.
 
 ### 6. Committing
 
@@ -102,11 +102,22 @@ the change being clearly described.
 pnpm release -- patch   # or minor / major
 ```
 
-This bumps `packages/ui/package.json`'s version, moves the `CHANGELOG.md` `[Unreleased]` section
-under the new version heading, commits, tags (`vX.Y.Z`), and pushes — which triggers
-`.github/workflows/publish.yml` to build `@behindthemusictree/ui` and publish it on npm (trusted
-publishing, with provenance; npm may take a few minutes to serve the new version). Must be run
-from a clean `main` branch.
+Run this on a clean task branch from `main`, after filling `[Unreleased]`. It prepares
+`packages/ui/package.json`, the lockfile and the versioned changelog section. Review and
+commit these changes, then open a PR to `main`. It does not commit, tag or push.
+
+After an approved version bump merges, `.github/workflows/release-tag.yml` creates an
+annotated tag on that exact commit using the shared release App. A merge without a bump,
+including the initial migration, creates no tag. The contract is `.github/release-policy.json`.
+The organization must provision `RELEASE_APP_ID` and `RELEASE_APP_PRIVATE_KEY` and activate
+the selected repository and immutable tag protections through `github-config` first.
+
+The existing `.github/workflows/publish.yml` keeps its npm trusted publisher identity and
+publishes npm before the GitHub Release. Rerun the failed tag run after fixing a transient
+failure: an existing npm artifact is accepted only when its name, version and archive
+integrity match. Registry errors or a different archive fail explicitly. Never move a tag
+or bump again to repair a partial publication. Investigate non-reproducible archives before
+resuming. GitHub Release notes use the version's changelog section.
 
 ## License & Attribution
 

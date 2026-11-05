@@ -5,6 +5,8 @@ Format based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 ## [Unreleased]
 
+- Prepare releases through PRs; CI owns immutable tags and resumable npm publication.
+
 ## [0.15.0] - 2026-11-05
 
 ### Added
