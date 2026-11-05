@@ -28,12 +28,13 @@
     "dev": "tsup --watch",
     "build": "tsup",
     "lint": "tsc --noEmit",
-    "test": "echo \"no tests yet\""
+    "test": "vitest run",
+    "test:watch": "vitest"
   },
   "peerDependencies": {
+    "@behindthemusictree/brand": "^12.10.0",
     "react": ">=18.0.0",
-    "react-dom": ">=18.0.0",
-    "@behindthemusictree/brand": "^12.7.0"
+    "react-dom": ">=18.0.0"
   },
   "peerDependenciesMeta": {
     "@behindthemusictree/brand": {
@@ -48,13 +49,19 @@
     "tailwind-merge": "^3.2.0"
   },
   "devDependencies": {
-    "@behindthemusictree/brand": "^12.7.0",
+    "@behindthemusictree/brand": "^12.10.0",
+    "@testing-library/jest-dom": "7.0.0",
+    "@testing-library/react": "16.3.2",
+    "@testing-library/user-event": "^14.6.8",
     "@types/react": "^18.2.0",
     "@types/react-dom": "^18.2.0",
+    "happy-dom": "^21.0.4",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "tsup": "^8.0.0",
-    "typescript": "^5.0.0"
+    "typescript": "^5.0.0",
+    "vite": "^7.3.7",
+    "vitest": "4.1.11"
   },
   "author": "Andreas Garcia",
   "license": "ISC"
