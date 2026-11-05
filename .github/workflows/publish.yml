@@ -5,6 +5,10 @@ on:
     tags:
       - "v*"
 
+concurrency:
+  group: publish-${{ github.ref }}
+  cancel-in-progress: false
+
 jobs:
   publish:
     runs-on: ubuntu-latest
@@ -13,12 +17,22 @@ jobs:
       id-token: write
     steps:
       - uses: actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09 # v5.1.0
+        with:
+          fetch-depth: 0
+          persist-credentials: false
 
       - uses: pnpm/action-setup@fc06bc1257f339d1d5d8b3a19a8cae5388b55320 # v4.4.0
 
       - uses: actions/setup-node@a0853c24544627f65ddf259abe73b1d18a591444 # v5.0.0
         with:
           node-version: 22
+
+      - name: Validate tag and release notes
+        env:
+          GITHUB_REF_NAME: ${{ github.ref_name }}
+        run: |
+          git merge-base --is-ancestor "$(git rev-parse HEAD)" origin/main
+          node scripts/release-utils.cjs notes "$RUNNER_TEMP/release-notes.md"
 
       - run: pnpm install --frozen-lockfile
 
@@ -28,12 +42,17 @@ jobs:
       # direct `npm publish` (Allow npm publish), otherwise this step fails with ENEEDAUTH.
       - run: npm install -g npm@11.21.1
       - run: pnpm --filter @behindthemusictree/ui pack --pack-destination "$RUNNER_TEMP"
-      - run: npm publish "$RUNNER_TEMP"/behindthemusictree-ui-*.tgz --provenance --access public
+      - name: Check existing npm artifact
+        id: registry
+        run: node scripts/release-utils.cjs registry "$RUNNER_TEMP"/behindthemusictree-ui-*.tgz
+      - if: steps.registry.outputs.exists != 'true'
+        run: npm publish "$RUNNER_TEMP"/behindthemusictree-ui-*.tgz --provenance --access public
 
       - name: Create GitHub Release
         uses: softprops/action-gh-release@3bb12739c298aeb8a4eeaf626c5b8d85266b0e65 # v2.6.2
         with:
           tag_name: ${{ github.ref_name }}
-          generate_release_notes: true
+          body_path: ${{ runner.temp }}/release-notes.md
+          overwrite_files: false
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
