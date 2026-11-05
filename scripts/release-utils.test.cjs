@@ -36,3 +36,30 @@ test('registry absence, identical artifact and partial-publication conflicts', a
     fs.rmSync(dir, { recursive: true });
   }
 });
+
+test('fenced examples never select or truncate release notes', () => {
+  for (const marker of ['```', '~~~']) {
+    const notes = `- Real\n${marker}markdown\n## [1.2.3]\nexample\n${marker} trailing text\n## still code\n${marker}\n- End`;
+    const text = `${marker}markdown\n## [1.2.3]\nexample\n${marker}\n## [1.2.3]\n${notes}\n## [1.2.2]\nOld`;
+    assert.equal(section(text, '## [1.2.3]'), notes);
+  }
+  assert.throws(() => section('## [Unreleased]\n<!-- draft -->', '## [Unreleased]'));
+});
+
+test('notes CLI preserves fenced headings and selects the real version', () => {
+  const { execFileSync } = require('node:child_process');
+  const dir = fs.mkdtempSync(path.join(os.tmpdir(), 'ui-notes-'));
+  try {
+    fs.mkdirSync(path.join(dir, 'packages/ui'), { recursive: true });
+    fs.writeFileSync(path.join(dir, 'packages/ui/package.json'), '{"version":"1.2.3"}');
+    const notes = '- Real\n```markdown\n## example\n```\n- End';
+    fs.writeFileSync(path.join(dir, 'CHANGELOG.md'), `## [1.2.3]\n${notes}\n## [1.2.2]\nOld`);
+    const output = path.join(dir, 'notes.md');
+    execFileSync(process.execPath, [path.join(__dirname, 'release-utils.cjs'), 'notes', output], {
+      cwd: dir, env: { ...process.env, GITHUB_REF_NAME: 'v1.2.3' },
+    });
+    assert.equal(fs.readFileSync(output, 'utf8'), notes + '\n');
+  } finally {
+    fs.rmSync(dir, { recursive: true });
+  }
+});
