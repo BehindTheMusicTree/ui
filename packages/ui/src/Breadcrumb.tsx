@@ -29,7 +29,8 @@ export interface BreadcrumbProps {
 const crumbClassName = "shrink-0 cursor-pointer border-none bg-transparent p-0 hover:underline";
 
 /** A canvas location trail: home, the ancestors, then the current item, in a floating card.
- * Unpositioned: the caller places it over its canvas. */
+ * Unpositioned: the caller places it over its canvas through `className`, narrowing `max-w-full`
+ * when the card must leave room for other controls. */
 export function Breadcrumb({
   home,
   items,
@@ -41,9 +42,14 @@ export function Breadcrumb({
 }: BreadcrumbProps) {
   const current = items[items.length - 1] as BreadcrumbItem | undefined;
   const ancestors = items.slice(0, -1);
-  // Keyed on the current item so moving elsewhere collapses the trail again.
-  const [expandedAt, setExpandedAt] = useState<string | null>(null);
-  const collapsed = expandedAt !== current?.id && ancestors.length > maxVisibleAncestors;
+  const [expanded, setExpanded] = useState(false);
+  // Moving to another item (or back to an earlier one) collapses the trail again.
+  const [expandedFor, setExpandedFor] = useState(current?.id);
+  if (expandedFor !== current?.id) {
+    setExpandedFor(current?.id);
+    setExpanded(false);
+  }
+  const collapsed = !expanded && ancestors.length > maxVisibleAncestors;
   const visibleAncestors = collapsed ? ancestors.slice(-ancestorsKeptWhenCollapsed) : ancestors;
   const separator = <span aria-hidden="true">›</span>;
 
@@ -52,7 +58,7 @@ export function Breadcrumb({
       aria-label="Breadcrumb"
       className={cn(
         floatingControlCardClassName,
-        "box-border flex items-center gap-1 overflow-hidden whitespace-nowrap px-2.5 py-1 text-xs text-[var(--color-text-muted)]",
+        "box-border flex max-w-full items-center gap-1 overflow-hidden whitespace-nowrap px-2.5 py-1 text-xs text-[var(--color-text-muted)]",
         className,
       )}
     >
@@ -72,7 +78,7 @@ export function Breadcrumb({
             type="button"
             aria-label="Show full path"
             aria-expanded={false}
-            onClick={() => setExpandedAt(current?.id ?? null)}
+            onClick={() => setExpanded(true)}
             className={crumbClassName}
           >
             …

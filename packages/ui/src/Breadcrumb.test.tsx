@@ -64,6 +64,15 @@ describe("Breadcrumb", () => {
     );
     expect(crumbs().getByRole("button", { name: "Show full path" })).toBeInTheDocument();
     expect(crumbs().queryByRole("button", { name: "Rock" })).not.toBeInTheDocument();
+
+    rerender(
+      <Breadcrumb
+        home={{ label: "All genres", onSelect: vi.fn() }}
+        items={trail("Rock", "Punk", "Hardcore", "Crust", "D-beat")}
+        onSelect={onSelect}
+      />,
+    );
+    expect(crumbs().getByRole("button", { name: "Show full path" })).toBeInTheDocument();
   });
 
   it("keeps a short trail whole", () => {
