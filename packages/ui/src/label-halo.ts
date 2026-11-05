@@ -4,26 +4,32 @@
 /** Visible halo thickness per unit of font size. */
 export const LABEL_HALO_WIDTH_RATIO = 0.08;
 
-/** Perceived brightness (0-255) above which a label reads as light. A saturated mid-tone such as
- * #2563EB must read as dark: WCAG's contrast crossover would call it light and give it a black halo. */
-const LIGHT_BRIGHTNESS_THRESHOLD = 128;
+/** Relative luminance up to which a label reads as dark: white text on it still reaches the 3:1
+ * contrast WCAG asks of large text, (1.05 / 3) - 0.05. Matches how charts already pair white text
+ * with saturated blues, which WCAG's equal-contrast crossover (~0.18) would call light. */
+const DARK_LUMINANCE_MAX = 1.05 / 3 - 0.05;
 
 const HEX_COLOR = /^#([0-9a-f]{3}|[0-9a-f]{6})$/i;
 
-/** YIQ perceived brightness of a #rgb / #rrggbb color. */
-function perceivedBrightness(hex: string): number {
+function linearChannel(channel: number): number {
+  const c = channel / 255;
+  return c <= 0.04045 ? c / 12.92 : ((c + 0.055) / 1.055) ** 2.4;
+}
+
+/** WCAG relative luminance of a #rgb / #rrggbb color. */
+function relativeLuminance(hex: string): number {
   if (!HEX_COLOR.test(hex)) {
     throw new Error(`labelHalo: expected a #rgb or #rrggbb color, got "${hex}"`);
   }
   const digits = hex.slice(1);
   const full = digits.length === 3 ? [...digits].map((d) => d + d).join("") : digits;
-  const [r, g, b] = [0, 2, 4].map((i) => parseInt(full.slice(i, i + 2), 16));
-  return (r * 299 + g * 587 + b * 114) / 1000;
+  const [r, g, b] = [0, 2, 4].map((i) => linearChannel(parseInt(full.slice(i, i + 2), 16)));
+  return 0.2126 * r + 0.7152 * g + 0.0722 * b;
 }
 
-/** Black halo behind a light label, white behind a dark one (by perceived brightness). */
+/** Black halo behind a light label, white behind a dark one (dark = white text would reach 3:1 on it). */
 export function labelHaloColor(textColor: string): "#000000" | "#ffffff" {
-  return perceivedBrightness(textColor) > LIGHT_BRIGHTNESS_THRESHOLD ? "#000000" : "#ffffff";
+  return relativeLuminance(textColor) > DARK_LUMINANCE_MAX ? "#000000" : "#ffffff";
 }
 
 /** Halo color and visible width (px) for a label of `textColor` rendered at `fontSize` px. */

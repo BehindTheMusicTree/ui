@@ -17,6 +17,8 @@ describe("labelHaloColor", () => {
     expect(labelHaloColor("#2563EB")).toBe("#ffffff");
     expect(labelHaloColor("#3B82F6")).toBe("#ffffff");
     expect(labelHaloColor("#DC2626")).toBe("#ffffff");
+    expect(labelHaloColor("#5182EF")).toBe("#ffffff");
+    expect(labelHaloColor("#3296F0")).toBe("#ffffff");
   });
 
   it("accepts the short hex form", () => {
