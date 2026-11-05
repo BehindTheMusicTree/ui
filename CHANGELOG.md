@@ -7,7 +7,7 @@ Format based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 ### Added
 
-- `labelHalo`, `labelHaloColor` and `LABEL_HALO_WIDTH_RATIO`: headless label contrast policy (black halo behind light text, white behind dark, width proportional to font size) shared by the tree, genealogy and map views.
+- `labelHalo`, `labelHaloColor` and `LABEL_HALO_WIDTH_RATIO`: headless label contrast policy (black halo behind light text, white behind dark by perceived brightness, width proportional to font size) shared by the tree, genealogy and map views.
 
 ### Notes
 
