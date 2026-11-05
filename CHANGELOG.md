@@ -14,6 +14,7 @@ Format based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 ### Changed
 
 - `DetailPanel` positions itself with `--layout-panel-edge` (brand ≥ 12.10) instead of `--layout-gutter`.
+- Peer dependency `@behindthemusictree/brand` is now `^12.10.0`.
 
 ## [0.14.0] - 2026-11-04
 
