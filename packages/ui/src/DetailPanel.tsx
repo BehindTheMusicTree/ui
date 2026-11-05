@@ -151,7 +151,7 @@ export const DetailPanel = forwardRef<HTMLDivElement, DetailPanelProps>(function
       data-expanded={expanded}
       data-sheet={isSheet}
       className={cn(
-        "absolute bottom-[var(--layout-gutter)] top-[var(--layout-gutter)] z-10 w-[var(--layout-detail-panel-w)] transition-[transform,visibility] duration-200 ease-out motion-reduce:transition-none",
+        "absolute bottom-[var(--layout-gutter)] top-[var(--layout-gutter)] z-10 w-[var(--layout-detail-panel-w)] transition-transform duration-200 ease-out motion-reduce:transition-none",
         isLeft ? "left-[var(--layout-panel-edge)]" : "right-[var(--layout-panel-edge)]",
         expanded && "z-20 w-auto",
         expanded && (isLeft ? "right-[var(--layout-center-right)]" : "left-[var(--layout-center-left)]"),
@@ -161,8 +161,7 @@ export const DetailPanel = forwardRef<HTMLDivElement, DetailPanelProps>(function
           (sheetFull
             ? "max-md:h-[calc(100%-var(--layout-gutter))]"
             : "max-md:h-[var(--layout-sheet-peek)]"),
-        collapsed && "invisible delay-[0s,200ms]",
-        collapsed &&
+                collapsed &&
           (isLeft
             ? "-translate-x-[calc(100%+var(--layout-panel-edge))]"
             : "translate-x-[calc(100%+var(--layout-panel-edge))]"),
@@ -170,12 +169,15 @@ export const DetailPanel = forwardRef<HTMLDivElement, DetailPanelProps>(function
       )}
     >
       <aside
+        aria-labelledby={titleId}
         {...rest}
         ref={panelRef}
         id={panelId}
-        aria-labelledby={titleId}
         className={cn(
           "flex h-full w-full flex-col overflow-hidden rounded-[var(--radius-panel)] bg-[var(--color-surface)] text-[0.8125rem] leading-[1.45] text-[var(--color-text)] shadow-[0_1px_2px_rgba(60,64,67,0.3),0_2px_6px_2px_rgba(60,64,67,0.15)]",
+          // Hides only the panel body once the slide-out ends, so the edge tab stays reachable to reopen it.
+          "transition-[visibility] duration-200 motion-reduce:transition-none",
+          collapsed && "invisible delay-200",
           isSheet && "max-md:rounded-b-none",
           className,
         )}
@@ -187,6 +189,8 @@ export const DetailPanel = forwardRef<HTMLDivElement, DetailPanelProps>(function
             aria-expanded={sheetFull}
             onPointerDown={onGrabberPointerDown}
             onPointerUp={onGrabberPointerUp}
+            onPointerCancel={() => (grabberDragRef.current = null)}
+            onKeyDown={() => (grabberDragRef.current = null)}
             onClick={onGrabberClick}
             className="hidden h-[var(--layout-touch-target)] w-full shrink-0 cursor-grab touch-none items-center justify-center text-[var(--color-text-muted)] before:h-1 before:w-9 before:rounded-full before:bg-current before:opacity-40 before:content-[''] max-md:flex"
           />

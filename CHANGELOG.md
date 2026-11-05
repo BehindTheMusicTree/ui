@@ -13,6 +13,7 @@ Format based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 ### Changed
 
+- **Breaking:** `DetailPanel` now defaults `sheet` and `closeOnEscape` to `true`, applies `className` to the inner `<aside>` (positioning lives on a new outer `<div>`), and its forwarded `ref` targets that outer `<div>`.
 - `DetailPanel` positions itself with `--layout-panel-edge` (brand ≥ 12.10) instead of `--layout-gutter`.
 - Peer dependency `@behindthemusictree/brand` is now `^12.10.0`.
 

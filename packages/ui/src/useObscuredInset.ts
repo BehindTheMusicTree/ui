@@ -31,7 +31,8 @@ function sameInset(a: ObscuredInset, b: ObscuredInset): boolean {
 /**
  * Part of the canvas a `DetailPanel` currently covers, in px, for the panel's mode (side, sheet,
  * expanded, collapsed). Only the covered edge is set; a collapsed or unmounted panel covers nothing.
- * Pass the ref forwarded to `DetailPanel`.
+ * Pass the ref forwarded to `DetailPanel`; the panel must already be mounted when the host mounts
+ * (keep it rendered and use `collapsed`, rather than conditionally mounting it).
  */
 export function useObscuredInset(ref: RefObject<HTMLElement | null>): ObscuredInset {
   const [inset, setInset] = useState<ObscuredInset>({});
@@ -50,7 +51,10 @@ export function useObscuredInset(ref: RefObject<HTMLElement | null>): ObscuredIn
     if (panel.offsetParent) observer.observe(panel.offsetParent);
     const mutations = new MutationObserver(update);
     mutations.observe(panel, { attributes: true, attributeFilter: ["data-collapsed", "data-sheet", "data-side"] });
+    // Un-collapsing only changes a transform: the attribute change measures the panel still off-screen.
+    panel.addEventListener("transitionend", update);
     return () => {
+      panel.removeEventListener("transitionend", update);
       observer.disconnect();
       mutations.disconnect();
     };
