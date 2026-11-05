@@ -18,6 +18,7 @@ export { default as RingLoader } from "./RingLoader";
 export { default as UploadButtons } from "./UploadButtons";
 export type { UploadButtonsProps } from "./UploadButtons";
 export * from "./label-layout";
+export * from "./label-halo";
 export * from "./Combobox";
 export * from "./PanelEdgeTab";
 export * from "./useObscuredInset";
