@@ -5,6 +5,8 @@ Format based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 ## [Unreleased]
 
+## [0.15.0] - 2026-11-05
+
 ### Added
 
 - `DetailPanel` is now the single detail-panel shell: `headerStart`, `headerAccent`, `hideClose`, `hideTitle`, `expanded` + `aside` (two scrolling columns), `edgeTab`, `sheet` (bottom sheet with drag handle below `md`), `closeOnEscape` (leaves expanded mode first), `forwardRef` and `aria-labelledby`. The collapse transform moves the edge tab with the panel.
