@@ -5,6 +5,8 @@ Format based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 ## [Unreleased]
 
+## [0.17.0] - 2026-11-05
+
 ### Added
 
 - `Breadcrumb`: the location trail floated over a canvas (tree, region map). It shows a home icon, the ancestors and the current item in the floating-control card. A long trail collapses its middle into a "…" button, which collapses again when the current item changes. Pass `onSelectCurrent` to make the current item clickable. It is unpositioned, like `ZoomControls`.
