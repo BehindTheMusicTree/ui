@@ -1,12 +1,13 @@
 /** Headless label legibility policy shared by every chart: a light label gets a black halo, a dark one a
  * white halo, and the halo grows with the font size. Each renderer maps `width` to its own engine. */
 
-/** Luminance where black and white text have equal contrast: sqrt(1.05 * 0.05) - 0.05. Above it black
- * contrasts better, below it white does. */
-const CONTRAST_CROSSOVER_LUMINANCE = Math.sqrt(1.05 * 0.05) - 0.05;
-
 /** Visible halo thickness per unit of font size. */
-export const LABEL_HALO_WIDTH_RATIO = 0.12;
+export const LABEL_HALO_WIDTH_RATIO = 0.08;
+
+/** Relative luminance up to which a label reads as dark: white text on it still reaches the 3:1
+ * contrast WCAG asks of large text, (1.05 / 3) - 0.05. Matches how charts already pair white text
+ * with saturated blues, which WCAG's equal-contrast crossover (~0.18) would call light. */
+const DARK_LUMINANCE_MAX = 1.05 / 3 - 0.05;
 
 const HEX_COLOR = /^#([0-9a-f]{3}|[0-9a-f]{6})$/i;
 
@@ -15,6 +16,7 @@ function linearChannel(channel: number): number {
   return c <= 0.04045 ? c / 12.92 : ((c + 0.055) / 1.055) ** 2.4;
 }
 
+/** WCAG relative luminance of a #rgb / #rrggbb color. */
 function relativeLuminance(hex: string): number {
   if (!HEX_COLOR.test(hex)) {
     throw new Error(`labelHalo: expected a #rgb or #rrggbb color, got "${hex}"`);
@@ -25,13 +27,16 @@ function relativeLuminance(hex: string): number {
   return 0.2126 * r + 0.7152 * g + 0.0722 * b;
 }
 
-/** Black halo behind a light label, white behind a dark one (whichever contrasts more with the WCAG relative luminance of the text). */
+/** Black halo behind a light label, white behind a dark one (dark = white text would reach 3:1 on it). */
 export function labelHaloColor(textColor: string): "#000000" | "#ffffff" {
-  return relativeLuminance(textColor) > CONTRAST_CROSSOVER_LUMINANCE ? "#000000" : "#ffffff";
+  return relativeLuminance(textColor) > DARK_LUMINANCE_MAX ? "#000000" : "#ffffff";
 }
 
 /** Halo color and visible width (px) for a label of `textColor` rendered at `fontSize` px. */
-export function labelHalo(textColor: string, fontSize: number): { color: "#000000" | "#ffffff"; width: number } {
+export function labelHalo(
+  textColor: string,
+  fontSize: number,
+): { color: "#000000" | "#ffffff"; width: number } {
   if (!Number.isFinite(fontSize) || fontSize <= 0) {
     throw new Error(`labelHalo: expected a positive finite font size, got ${fontSize}`);
   }

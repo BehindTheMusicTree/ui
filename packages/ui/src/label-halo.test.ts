@@ -13,6 +13,14 @@ describe("labelHaloColor", () => {
     expect(labelHaloColor("#595959")).toBe("#ffffff");
   });
 
+  it("treats saturated mid-tones as dark", () => {
+    expect(labelHaloColor("#2563EB")).toBe("#ffffff");
+    expect(labelHaloColor("#3B82F6")).toBe("#ffffff");
+    expect(labelHaloColor("#DC2626")).toBe("#ffffff");
+    expect(labelHaloColor("#5182EF")).toBe("#ffffff");
+    expect(labelHaloColor("#3296F0")).toBe("#ffffff");
+  });
+
   it("accepts the short hex form", () => {
     expect(labelHaloColor("#fff")).toBe("#000000");
     expect(labelHaloColor("#000")).toBe("#ffffff");
