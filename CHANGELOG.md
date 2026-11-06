@@ -7,6 +7,8 @@ Format based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 ### Fixed
 
+- Give detail panel scroll areas a thin scrollbar using semantic theme colors.
+
 - Preserve complete release notes when Markdown examples contain version headings.
 
 ## [0.17.0] - 2026-11-05
