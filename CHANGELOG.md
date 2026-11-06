@@ -5,6 +5,12 @@ Format based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 ## [Unreleased]
 
+### Changed
+
+- Halve the left padding of panel sections.
+
+- Align detail panels with the top and bottom of their canvas and left-sided panels with its left edge.
+
 ### Fixed
 
 - Preserve complete release notes when Markdown examples contain version headings.
