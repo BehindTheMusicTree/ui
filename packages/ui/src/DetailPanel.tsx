@@ -151,19 +151,19 @@ export const DetailPanel = forwardRef<HTMLDivElement, DetailPanelProps>(function
       data-expanded={expanded}
       data-sheet={isSheet}
       className={cn(
-        "absolute bottom-[var(--layout-gutter)] top-[var(--layout-gutter)] z-10 w-[var(--layout-detail-panel-w)] transition-transform duration-200 ease-out motion-reduce:transition-none",
-        isLeft ? "left-[var(--layout-panel-edge)]" : "right-[var(--layout-panel-edge)]",
+        "absolute bottom-0 top-0 z-10 w-[var(--layout-detail-panel-w)] transition-transform duration-200 ease-out motion-reduce:transition-none",
+        isLeft ? "left-0" : "right-[var(--layout-panel-edge)]",
         expanded && "z-20 w-auto",
         expanded && (isLeft ? "right-[var(--layout-center-right)]" : "left-[var(--layout-center-left)]"),
         isSheet &&
           "max-md:inset-x-0 max-md:bottom-0 max-md:top-auto max-md:w-auto max-md:pb-[env(safe-area-inset-bottom,0px)]",
         isSheet &&
           (sheetFull
-            ? "max-md:h-[calc(100%-var(--layout-gutter))]"
+            ? "max-md:h-full"
             : "max-md:h-[var(--layout-sheet-peek)]"),
                 collapsed &&
           (isLeft
-            ? "-translate-x-[calc(100%+var(--layout-panel-edge))]"
+            ? "-translate-x-full"
             : "translate-x-[calc(100%+var(--layout-panel-edge))]"),
         collapsed && isSheet && "max-md:translate-x-0 max-md:translate-y-full",
       )}
@@ -178,6 +178,7 @@ export const DetailPanel = forwardRef<HTMLDivElement, DetailPanelProps>(function
           // Hides only the panel body once the slide-out ends, so the edge tab stays reachable to reopen it.
           "transition-[visibility] duration-200 motion-reduce:transition-none",
           collapsed && "invisible delay-200",
+          isLeft && (isSheet ? "md:rounded-l-none" : "rounded-l-none"),
           isSheet && "max-md:rounded-b-none",
           className,
         )}
