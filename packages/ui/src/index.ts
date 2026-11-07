@@ -21,5 +21,6 @@ export type { UploadButtonsProps } from "./UploadButtons";
 export * from "./label-layout";
 export * from "./label-halo";
 export * from "./Combobox";
+export * from "./SearchCombobox";
 export * from "./PanelEdgeTab";
 export * from "./useObscuredInset";
