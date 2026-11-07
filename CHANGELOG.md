@@ -5,6 +5,8 @@ Format based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 ## [Unreleased]
 
+## [0.18.0] - 2026-11-07
+
 ### Added
 
 - `SearchCombobox`: a pill-shaped search field over `Combobox` with a search icon or spinner, an optional clear button and a `leading` action slot.
