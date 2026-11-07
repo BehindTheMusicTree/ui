@@ -9,6 +9,12 @@ Format based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 - `SearchCombobox`: a pill-shaped search field over `Combobox` with a search icon or spinner, an optional clear button and a `leading` action slot.
 
+## [0.17.2] - 2026-11-07
+
+### Fixed
+
+- Give detail panel scroll areas a thin scrollbar using semantic theme colors.
+
 ## [0.17.1] - 2026-11-06
 
 ### Changed

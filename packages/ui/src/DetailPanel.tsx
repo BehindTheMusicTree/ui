@@ -17,6 +17,7 @@ import { IconButton } from "./IconButton";
 import { PanelEdgeTab, PanelEdgeTabProps } from "./PanelEdgeTab";
 
 const SHEET_DRAG_THRESHOLD_PX = 32;
+const SCROLL_AREA = "[scrollbar-color:var(--color-text-muted)_transparent] [scrollbar-width:thin] [&::-webkit-scrollbar]:w-1.5 [&::-webkit-scrollbar-track]:bg-transparent [&::-webkit-scrollbar-thumb]:rounded-full [&::-webkit-scrollbar-thumb]:border-0 [&::-webkit-scrollbar-thumb]:bg-[var(--color-text-muted)]";
 
 /** Whether an Escape press belongs to something else: a field being edited, a modal, or another handler. */
 export function isEscapeOwnedElsewhere(event: KeyboardEvent): boolean {
@@ -215,14 +216,15 @@ export const DetailPanel = forwardRef<HTMLDivElement, DetailPanelProps>(function
           <div
             className={cn(
               "min-h-0 flex-1 overflow-y-auto md:grid md:grid-cols-[var(--layout-panel-aside-w)_minmax(0,1fr)] md:overflow-hidden",
+              SCROLL_AREA,
               bodyClassName,
             )}
           >
-            <div className="pb-4 md:min-h-0 md:overflow-y-auto md:border-r md:border-[var(--color-border)]">{aside}</div>
-            <div className="pb-4 md:min-h-0 md:overflow-y-auto">{children}</div>
+            <div className={cn("pb-4 md:min-h-0 md:overflow-y-auto md:border-r md:border-[var(--color-border)]", SCROLL_AREA)}>{aside}</div>
+            <div className={cn("pb-4 md:min-h-0 md:overflow-y-auto", SCROLL_AREA)}>{children}</div>
           </div>
         ) : (
-          <div className={cn("min-h-0 flex-1 overflow-y-auto pb-4", bodyClassName)}>{children}</div>
+          <div className={cn("min-h-0 flex-1 overflow-y-auto pb-4", SCROLL_AREA, bodyClassName)}>{children}</div>
         )}
       </aside>
       {edgeTab && (
