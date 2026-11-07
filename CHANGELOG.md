@@ -5,6 +5,8 @@ Format based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 ## [Unreleased]
 
+## [0.17.2] - 2026-11-07
+
 ### Fixed
 
 - Give detail panel scroll areas a thin scrollbar using semantic theme colors.
