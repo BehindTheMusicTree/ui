@@ -5,6 +5,12 @@ Format based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 ## [Unreleased]
 
+## [0.17.2] - 2026-11-07
+
+### Fixed
+
+- Give detail panel scroll areas a thin scrollbar using semantic theme colors.
+
 ## [0.17.1] - 2026-11-06
 
 ### Changed
@@ -14,8 +20,6 @@ Format based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 - Align detail panels with the top and bottom of their canvas and left-sided panels with its left edge.
 
 ### Fixed
-
-- Give detail panel scroll areas a thin scrollbar using semantic theme colors.
 
 - Preserve complete release notes when Markdown examples contain version headings.
 
