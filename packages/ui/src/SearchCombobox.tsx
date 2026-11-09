@@ -4,9 +4,8 @@ import type { ReactNode } from "react";
 import { LoaderCircle, Search, X } from "lucide-react";
 import { Combobox, type ComboboxProps } from "./Combobox";
 import { cn } from "./class-name";
-
-const ICON_BUTTON =
-  "flex items-center justify-center rounded-full text-[var(--color-text-muted)] hover:bg-[var(--color-surface-muted)] hover:text-[var(--color-text)] [@media(pointer:coarse)]:min-h-[var(--layout-touch-target)] [@media(pointer:coarse)]:min-w-[var(--layout-touch-target)]";
+import { IconButton } from "./IconButton";
+import { ICON_BUTTON_BASE } from "./icon-button-base";
 
 export interface SearchComboboxProps
   extends Omit<ComboboxProps, "loading" | "inputClassName" | "empty" | "canLoadMore" | "onLoadMore"> {
@@ -65,9 +64,9 @@ export function SearchCombobox({
           />
         </span>
         {onClear && (
-          <button type="button" aria-label={clearLabel} className={cn(ICON_BUTTON, "p-2")} onClick={onClear}>
+          <IconButton size="lg" aria-label={clearLabel} onClick={onClear}>
             <X aria-hidden="true" className="h-6 w-6" />
-          </button>
+          </IconButton>
         )}
       </div>
     </div>
@@ -75,4 +74,7 @@ export function SearchCombobox({
 }
 
 /** Round icon button sized for the `leading` slot of `SearchCombobox`. */
-export const SEARCH_LEADING_BUTTON_CLASS = cn(ICON_BUTTON, "p-1.5");
+export const SEARCH_LEADING_BUTTON_CLASS = cn(
+  ICON_BUTTON_BASE,
+  "p-1.5 [@media(pointer:coarse)]:min-h-[var(--layout-touch-target)] [@media(pointer:coarse)]:min-w-[var(--layout-touch-target)]",
+);

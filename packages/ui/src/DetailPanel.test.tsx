@@ -25,14 +25,31 @@ describe("DetailPanel", () => {
     expect(onClose).toHaveBeenCalledTimes(1);
   });
 
-  it("omits the close button when hideClose is set", () => {
-    setup({ hideClose: true });
-    expect(screen.queryByRole("button", { name: "Close" })).not.toBeInTheDocument();
-  });
+  describe("titleInSearch", () => {
+    it("drops the close button", () => {
+      setup({ titleInSearch: true });
+      expect(screen.queryByRole("button", { name: "Close" })).not.toBeInTheDocument();
+    });
 
-  it("keeps a hidden title available to assistive tech", () => {
-    setup({ hideTitle: true });
-    expect(screen.getByRole("heading", { name: "Rock" })).toHaveClass("sr-only");
+    it("keeps the title for assistive tech only", () => {
+      setup({ titleInSearch: true });
+      expect(screen.getByRole("heading", { name: "Rock" })).toHaveClass("sr-only");
+      expect(screen.getByRole("complementary", { name: "Rock" })).toBeInTheDocument();
+    });
+
+    it("still closes on Escape", () => {
+      const { onClose } = setup({ titleInSearch: true });
+      fireEvent.keyDown(document, { key: "Escape" });
+      expect(onClose).toHaveBeenCalledTimes(1);
+    });
+
+    it("still closes on a downward drag from peek", () => {
+      const { onClose } = setup({ titleInSearch: true });
+      const grabber = screen.getByRole("button", { name: "Resize panel" });
+      fireEvent.pointerDown(grabber, { clientY: 200 });
+      fireEvent.pointerUp(grabber, { clientY: 300 });
+      expect(onClose).toHaveBeenCalledTimes(1);
+    });
   });
 
   it("makes the panel inert while collapsed", () => {
@@ -141,13 +158,6 @@ describe("DetailPanel", () => {
       fireEvent.pointerUp(grabber(), { clientY: 300 });
       expect(onClose).not.toHaveBeenCalled();
       expect(grabber()).toHaveAttribute("aria-expanded", "false");
-    });
-
-    it("does not close on a downward drag when hideClose is set", () => {
-      const { onClose } = setup({ hideClose: true });
-      fireEvent.pointerDown(grabber(), { clientY: 200 });
-      fireEvent.pointerUp(grabber(), { clientY: 300 });
-      expect(onClose).not.toHaveBeenCalled();
     });
 
     it("ignores short drags", () => {
