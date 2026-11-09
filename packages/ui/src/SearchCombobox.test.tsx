@@ -37,4 +37,11 @@ describe("SearchCombobox", () => {
     expect(screen.getByRole("button", { name: "Previous" })).toBeInTheDocument();
     expect(screen.getByText("Searching…")).toBeInTheDocument();
   });
+
+  it("keeps the search height on coarse pointers instead of the touch-target height", () => {
+    render(<SearchCombobox {...base} />);
+    const input = screen.getByRole("combobox", { name: "Search" });
+    expect(input).toHaveClass("[@media(pointer:coarse)]:h-[var(--layout-search-h)]");
+    expect(input).not.toHaveClass("[@media(pointer:coarse)]:h-[var(--layout-touch-target)]");
+  });
 });

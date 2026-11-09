@@ -176,7 +176,7 @@ export const DetailPanel = forwardRef<HTMLDivElement, DetailPanelProps>(function
         ref={panelRef}
         id={panelId}
         className={cn(
-          "flex h-full w-full flex-col overflow-hidden rounded-[var(--radius-panel)] bg-[var(--color-surface)] text-[0.8125rem] leading-[1.45] text-[var(--color-text)] shadow-[0_1px_2px_rgba(60,64,67,0.3),0_2px_6px_2px_rgba(60,64,67,0.15)]",
+          "flex h-full w-full flex-col overflow-hidden rounded-[var(--radius-panel)] bg-[var(--color-surface)] text-body text-[var(--color-text)] shadow-[0_1px_2px_rgba(60,64,67,0.3),0_2px_6px_2px_rgba(60,64,67,0.15)]",
           // Hides only the panel body once the slide-out ends, so the edge tab stays reachable to reopen it.
           "transition-[visibility] duration-200 motion-reduce:transition-none",
           collapsed && "invisible delay-200",
@@ -206,13 +206,13 @@ export const DetailPanel = forwardRef<HTMLDivElement, DetailPanelProps>(function
             // A peeking mobile sheet sits below the search field, so only taller panels need to clear it.
             titleInSearch &&
               (isSheet && !sheetFull
-                ? "md:pt-[calc(var(--layout-search-h)+var(--layout-panel-inset)+0.5rem)]"
-                : "pt-[calc(var(--layout-search-h)+var(--layout-panel-inset)+0.5rem)]"),
+                ? "md:pt-search-clear"
+                : "pt-search-clear"),
             headerClassName,
           )}
         >
           {headerStart}
-          <h2 id={titleId} className={cn("min-w-0 flex-1 break-words text-base font-semibold", titleInSearch && "sr-only")}>
+          <h2 id={titleId} className={cn("min-w-0 flex-1 break-words text-title", titleInSearch && "sr-only")}>
             {title}
           </h2>
           {headerActions}
