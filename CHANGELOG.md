@@ -5,6 +5,8 @@ Format based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 ## [Unreleased]
 
+## [0.20.0] - 2026-11-09
+
 ### Changed
 
 - Type roles from `@behindthemusictree/brand` 12.11: `Combobox` input uses `text-input`, `SearchCombobox` uses `text-search` and keeps `--layout-search-h` on coarse pointers, `DetailPanel` body uses `text-body` and its title `text-title`; the title-in-search padding uses `pt-search-clear`. Requires brand `^12.11.0`.
