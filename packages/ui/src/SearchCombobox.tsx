@@ -41,7 +41,7 @@ export function SearchCombobox({
         {...combobox}
         loading={loading ? loadingLabel : undefined}
         inputClassName={cn(
-          "h-[var(--layout-search-h,3rem)] rounded-full border-[var(--color-border)] bg-[var(--color-surface)] pr-20 text-base shadow-md transition-[padding] duration-200 ease-out motion-reduce:transition-none",
+          "h-[var(--layout-search-h)] [@media(pointer:coarse)]:h-[var(--layout-search-h)] rounded-full border-[var(--color-border)] bg-[var(--color-surface)] pr-20 text-search shadow-md transition-[padding] duration-200 ease-out motion-reduce:transition-none",
           leading ? "pl-11" : "pl-6",
           inputClassName,
         )}
