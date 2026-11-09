@@ -5,6 +5,8 @@ Format based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 ## [Unreleased]
 
+## [0.19.0] - 2026-11-09
+
 ### Changed
 
 - **Breaking:** `DetailPanel` replaces `hideTitle` and `hideClose` with `titleInSearch`. The header clears the floating search field by itself, and Escape and the sheet drag still close the panel.
