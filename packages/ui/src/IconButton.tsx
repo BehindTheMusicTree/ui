@@ -3,14 +3,16 @@
 import { ButtonHTMLAttributes, forwardRef } from "react";
 import { cva, type VariantProps } from "class-variance-authority";
 import { cn } from "./class-name";
+import { ICON_BUTTON_BASE } from "./icon-button-base";
 
 const iconButtonVariants = cva(
-  "inline-flex shrink-0 items-center justify-center rounded-full text-[var(--color-text-muted)] transition-colors duration-200 hover:bg-[var(--color-surface-muted)] hover:text-[var(--color-text)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-focus-ring)] disabled:cursor-not-allowed disabled:opacity-50",
+  ICON_BUTTON_BASE,
   {
     variants: {
       size: {
         sm: "h-6 w-6 [@media(pointer:coarse)]:h-[var(--layout-touch-target)] [@media(pointer:coarse)]:w-[var(--layout-touch-target)]",
         md: "h-8 w-8 [@media(pointer:coarse)]:h-[var(--layout-touch-target)] [@media(pointer:coarse)]:w-[var(--layout-touch-target)]",
+        lg: "h-10 w-10 [@media(pointer:coarse)]:h-[var(--layout-touch-target)] [@media(pointer:coarse)]:w-[var(--layout-touch-target)]",
       },
     },
     defaultVariants: { size: "md" },

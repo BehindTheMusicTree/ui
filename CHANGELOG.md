@@ -5,6 +5,15 @@ Format based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 ## [Unreleased]
 
+### Changed
+
+- **Breaking:** `DetailPanel` replaces `hideTitle` and `hideClose` with `titleInSearch`. The header clears the floating search field by itself, and Escape and the sheet drag still close the panel.
+- `IconButton` and the `SearchCombobox` icon buttons show focus with the hover background instead of a blue ring or the browser outline.
+
+### Added
+
+- `IconButton`: `lg` size.
+
 ## [0.18.0] - 2026-11-07
 
 ### Added

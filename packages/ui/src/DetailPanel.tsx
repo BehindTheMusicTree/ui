@@ -41,9 +41,11 @@ export interface DetailPanelProps extends Omit<HTMLAttributes<HTMLElement>, "tit
   headerStart?: ReactNode;
   /** Header colors, for content that tints the header (e.g. a genre's fill). */
   headerAccent?: { background: string; color: string };
-  hideClose?: boolean;
-  /** Keeps the title for assistive tech but hides it visually. */
-  hideTitle?: boolean;
+  /**
+   * A floating search field over the panel shows the title and offers the close action: the title stays for
+   * assistive tech only, the close button goes, and the header clears the field. Escape and the sheet drag still close.
+   */
+  titleInSearch?: boolean;
   /** Grows the panel across the canvas up to the opposite column; `aside` becomes a second column. */
   expanded?: boolean;
   /** Called when Escape leaves expanded mode. */
@@ -75,8 +77,7 @@ export const DetailPanel = forwardRef<HTMLDivElement, DetailPanelProps>(function
     headerActions,
     headerStart,
     headerAccent,
-    hideClose = false,
-    hideTitle = false,
+    titleInSearch = false,
     expanded = false,
     onExpandedChange,
     aside,
@@ -119,7 +120,7 @@ export const DetailPanel = forwardRef<HTMLDivElement, DetailPanelProps>(function
     drag.dragged = true;
     if (dy < 0) setSheetFull(true);
     else if (sheetFull) setSheetFull(false);
-    else if (!hideClose) onClose();
+    else onClose();
   };
   const onGrabberClick = () => {
     const dragged = grabberDragRef.current?.dragged ?? false;
@@ -132,11 +133,11 @@ export const DetailPanel = forwardRef<HTMLDivElement, DetailPanelProps>(function
     const onKeyDown = (event: KeyboardEvent) => {
       if (event.key !== "Escape" || isEscapeOwnedElsewhere(event)) return;
       if (expanded && onExpandedChange) onExpandedChange(false);
-      else if (!hideClose) onClose();
+      else onClose();
     };
     document.addEventListener("keydown", onKeyDown);
     return () => document.removeEventListener("keydown", onKeyDown);
-  }, [closeOnEscape, collapsed, expanded, onExpandedChange, hideClose, onClose]);
+  }, [closeOnEscape, collapsed, expanded, onExpandedChange, onClose]);
 
   const accentStyle: CSSProperties | undefined = headerAccent
     ? { backgroundColor: headerAccent.background, color: headerAccent.color }
@@ -199,14 +200,23 @@ export const DetailPanel = forwardRef<HTMLDivElement, DetailPanelProps>(function
         )}
         <header
           style={accentStyle}
-          className={cn("flex shrink-0 items-center gap-2 px-6 pb-2 pt-4", headerClassName)}
+          className={cn(
+            "flex shrink-0 items-center gap-2 px-6 pb-2 pt-4",
+            titleInSearch && "justify-end",
+            // A peeking mobile sheet sits below the search field, so only taller panels need to clear it.
+            titleInSearch &&
+              (isSheet && !sheetFull
+                ? "md:pt-[calc(var(--layout-search-h)+var(--layout-panel-inset)+0.5rem)]"
+                : "pt-[calc(var(--layout-search-h)+var(--layout-panel-inset)+0.5rem)]"),
+            headerClassName,
+          )}
         >
           {headerStart}
-          <h2 id={titleId} className={cn("min-w-0 flex-1 break-words text-base font-semibold", hideTitle && "sr-only")}>
+          <h2 id={titleId} className={cn("min-w-0 flex-1 break-words text-base font-semibold", titleInSearch && "sr-only")}>
             {title}
           </h2>
           {headerActions}
-          {!hideClose && (
+          {!titleInSearch && (
             <IconButton aria-label="Close" onClick={onClose} style={accentStyle && { color: "inherit" }}>
               <X aria-hidden="true" className="h-4 w-4" />
             </IconButton>
