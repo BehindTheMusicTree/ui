@@ -1,6 +1,8 @@
 "use client";
 
 import { Children, type MouseEventHandler, type ReactNode } from "react";
+import { cn } from "./class-name";
+import { PANEL_LABEL_CLASS, PANEL_LABEL_CONTENT_GAP_CLASS } from "./panel-label";
 
 export type ActionButtonProps = {
   icon: ReactNode;
@@ -49,10 +51,10 @@ export function ActionBand({ children, section, className }: ActionBandProps) {
       {hasSection && section && (
         <section
           aria-label={section.label ?? section.title}
-          className={`px-3.5 py-3${hasMain ? " border-t border-[var(--color-border)]" : ""}`}
+          className={`py-3${hasMain ? " border-t border-[var(--color-border)]" : ""}`}
         >
-          <h3 className="mb-2 text-xs font-semibold uppercase tracking-wide text-[var(--color-text-muted)]">{section.title}</h3>
-          <div className="flex flex-wrap items-center gap-1">{section.children}</div>
+          <h3 className={cn("px-panel-x", PANEL_LABEL_CLASS)}>{section.title}</h3>
+          <div className={cn(PANEL_LABEL_CONTENT_GAP_CLASS, "flex flex-wrap items-center gap-1 px-3.5")}>{section.children}</div>
         </section>
       )}
     </div>
