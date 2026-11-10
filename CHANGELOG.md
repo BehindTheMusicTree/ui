@@ -5,6 +5,8 @@ Format based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 ## [Unreleased]
 
+## [0.21.2] - 2026-11-10
+
 ### Added
 
 - `LabelPlacementItem.dot` is optional: an item without it is no obstacle for other labels, for a mark drawn under the labels (faded context).
