@@ -8,6 +8,11 @@ describe("ActionBand", () => {
     expect(container).toBeEmptyDOMElement();
   });
 
+  it("renders nothing when every child is filtered out", () => {
+    const { container } = render(<ActionBand>{[null, false]}</ActionBand>);
+    expect(container).toBeEmptyDOMElement();
+  });
+
   it("fires an enabled button and shows its caption", () => {
     const onClick = vi.fn();
     render(
