@@ -5,6 +5,8 @@ Format based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 ## [Unreleased]
 
+## [0.21.1] - 2026-11-10
+
 ### Fixed
 
 - `ActionBand` aligns its buttons on their top edge, so a button without a caption (such as Focus) no longer sits lower than the ones with a count.
