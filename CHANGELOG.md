@@ -5,6 +5,15 @@ Format based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 ## [Unreleased]
 
+### Added
+
+- `LabelPlacementItem.dot` is optional: an item without it is no obstacle for other labels, for a mark drawn under the labels (faded context).
+- `LabelPlacementItem.tier`: a placement band (default 0); every item of a higher tier is placed before any lower one, whatever their priorities.
+
+### Changed
+
+- `placeLabels` throws on a non-finite or inverted box, or a NaN priority or tier, instead of silently mis-placing labels (a NaN or infinite box never entered the index, an inverted one never overlapped anything). `±Infinity` priorities and zero-size boxes stay valid. A caller feeding NaN (for example a NaN rank from missing data) now gets an error naming the item rather than an unlabelled item.
+
 ## [0.21.1] - 2026-11-10
 
 ### Fixed

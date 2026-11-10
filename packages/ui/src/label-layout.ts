@@ -84,11 +84,34 @@ export interface LabelPlacementItem {
   id: string;
   /** Candidate label boxes, in preference order; empty when the label is not shown at all. */
   labels: Box[];
-  /** The item's own mark: an obstacle for every other item's label. */
-  dot: Box;
+  /** The item's own mark: an obstacle for every other item's label. Omit it for a mark drawn under the
+   * labels (faded context) that must never push them away. */
+  dot?: Box;
+  /** Order within a `tier`: higher is placed first. May be `±Infinity`, never NaN. */
   priority: number;
+  /** Placement band, default 0: every item of a higher tier is placed before any item of a lower one,
+   * whatever their priorities, so a whole category (faded context) yields without priority arithmetic.
+   * May be `±Infinity`, never NaN. */
+  tier?: number;
   /** Drawn even when no candidate is free: falls back to the first one and still blocks later labels. */
   forced?: boolean;
+}
+
+function assertValidBox(box: Box, itemId: string, field: string): void {
+  const { x0, x1, y0, y1 } = box;
+  if (![x0, x1, y0, y1].every(Number.isFinite) || x0 > x1 || y0 > y1) {
+    throw new Error(
+      `placeLabels: item "${itemId}" has an invalid ${field} box (${x0}, ${y0}, ${x1}, ${y1}): coordinates must be finite and ordered`,
+    );
+  }
+}
+
+function assertValidItem(item: LabelPlacementItem): void {
+  if (Number.isNaN(item.priority) || (item.tier !== undefined && Number.isNaN(item.tier))) {
+    throw new Error(`placeLabels: item "${item.id}" has a NaN priority or tier`);
+  }
+  item.labels.forEach((label, i) => assertValidBox(label, item.id, `labels[${i}]`));
+  if (item.dot) assertValidBox(item.dot, item.id, "dot");
 }
 
 const boxesOverlap = (a: Box, b: Box) => a.x0 < b.x1 && b.x0 < a.x1 && a.y0 < b.y1 && b.y0 < a.y1;
@@ -131,14 +154,17 @@ function createBoxGrid<T>() {
 }
 
 /** Index of each item's chosen label candidate, or -1 when it must be hidden: greedily, by descending
- * priority, takes each item's first candidate that overlaps no already-placed label and no other item's
- * dot (a `forced` item falls back to its first candidate instead of hiding). */
+ * tier then priority, takes each item's first candidate that overlaps no already-placed label and no other item's
+ * dot (a `forced` item falls back to its first candidate instead of hiding). An item without `dot` is no
+ * obstacle. Throws on a non-finite or inverted box, or a NaN priority, which would otherwise vanish from the
+ * index without a trace. */
 export function placeLabels(items: LabelPlacementItem[]): Map<string, number> {
+  for (const item of items) assertValidItem(item);
   const placement = new Map<string, number>();
   const keptGrid = createBoxGrid<true>();
   const dotGrid = createBoxGrid<string>();
-  for (const item of items) dotGrid.insert(item.dot, item.id);
-  for (const item of [...items].sort((a, b) => b.priority - a.priority)) {
+  for (const item of items) if (item.dot) dotGrid.insert(item.dot, item.id);
+  for (const item of [...items].sort((a, b) => (b.tier ?? 0) - (a.tier ?? 0) || b.priority - a.priority)) {
     let index = item.labels.findIndex(
       (label) => !keptGrid.some(label, () => true) && !dotGrid.some(label, (id) => id !== item.id),
     );
