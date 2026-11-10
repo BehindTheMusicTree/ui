@@ -5,6 +5,10 @@ Format based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 ## [Unreleased]
 
+### Fixed
+
+- `ActionBand` aligns its buttons on their top edge, so a button without a caption (such as Focus) no longer sits lower than the ones with a count.
+
 ### Changed
 
 - `PanelSection` titles, `FieldList` labels and `ActionBand` section titles share one style, exported as `PANEL_LABEL_CLASS`, on the brand `caption` size. The `ActionBand` section title aligns on the panel margin (`px-panel-x`). The gap between a title and its content is the same in all three (`PANEL_LABEL_CONTENT_GAP_CLASS`); `FieldList` rows grow by 4px.
