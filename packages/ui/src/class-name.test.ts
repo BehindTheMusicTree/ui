@@ -13,4 +13,9 @@ describe("cn", () => {
   it("still merges built-in font sizes", () => {
     expect(cn("text-sm", "text-lg")).toBe("text-lg");
   });
+
+  it("lets a plain spacing class replace the panel spacing keys", () => {
+    expect(cn("px-panel-x gap-panel-gap", "px-4 gap-2")).toBe("px-4 gap-2");
+    expect(cn("-mx-panel-x", "mx-0")).toBe("mx-0");
+  });
 });

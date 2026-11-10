@@ -16,7 +16,7 @@ export function PanelSection({ title, children, defaultOpen = true, className }:
   const contentId = useId();
   return (
     <section className={className}>
-      <h3 className="mt-2.5">
+      <h3>
         <button
           type="button"
           aria-expanded={open}
