@@ -5,6 +5,8 @@ Format based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 ## [Unreleased]
 
+## [0.21.0] - 2026-11-10
+
 ### Changed
 
 - **Breaking:** the `DetailPanel` body (and each column in aside mode) now sets the horizontal margin (`px-panel-x`) and the vertical gap between its direct children (`gap-panel-gap`); the header uses `px-panel-x`. `PanelSection` and `FieldList` no longer carry their own padding, so content must drop its section-level horizontal and vertical padding or the margin doubles. `ActionBand` and anything else that must touch the panel edges now needs a `PanelBleed`; in aside mode `bodyClassName` still targets the outer grid, not the columns. Requires brand `^12.12.0`.
