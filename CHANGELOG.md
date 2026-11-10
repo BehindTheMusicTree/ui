@@ -5,6 +5,10 @@ Format based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 ## [Unreleased]
 
+### Added
+
+- `ActionBand` and `ActionButton`: a vertically centered row of icon buttons with an optional caption (such as a playable count), disabled state and tooltip, plus an optional titled section.
+
 ## [0.20.0] - 2026-11-09
 
 ### Changed
