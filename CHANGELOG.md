@@ -5,6 +5,10 @@ Format based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 ## [Unreleased]
 
+### Changed
+
+- `ActionBand` centers its buttons, in the main row and in the titled section; the section title stays left-aligned.
+
 ## [0.21.2] - 2026-11-10
 
 ### Added

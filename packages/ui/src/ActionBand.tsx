@@ -34,6 +34,8 @@ export function ActionButton({ icon, label, caption, onClick, disabled, title, "
   );
 }
 
+const ACTION_ROW_CLASS = "flex flex-wrap items-start justify-center gap-1 px-3.5";
+
 export type ActionBandProps = {
   children?: ReactNode;
   /** Buttons shown in a titled section below the main row. */
@@ -47,14 +49,14 @@ export function ActionBand({ children, section, className }: ActionBandProps) {
   if (!hasMain && !hasSection) return null;
   return (
     <div className={`border-b border-[var(--color-border)]${className ? ` ${className}` : ""}`}>
-      {hasMain && <div className="flex flex-wrap items-start gap-1 px-3.5 py-3">{children}</div>}
+      {hasMain && <div className={cn(ACTION_ROW_CLASS, "py-3")}>{children}</div>}
       {hasSection && section && (
         <section
           aria-label={section.label ?? section.title}
           className={`py-3${hasMain ? " border-t border-[var(--color-border)]" : ""}`}
         >
           <h3 className={cn("px-panel-x", PANEL_LABEL_CLASS)}>{section.title}</h3>
-          <div className={cn(PANEL_LABEL_CONTENT_GAP_CLASS, "flex flex-wrap items-start gap-1 px-3.5")}>{section.children}</div>
+          <div className={cn(PANEL_LABEL_CONTENT_GAP_CLASS, ACTION_ROW_CLASS)}>{section.children}</div>
         </section>
       )}
     </div>

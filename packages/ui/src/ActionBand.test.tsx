@@ -50,6 +50,16 @@ describe("ActionBand", () => {
     expect(screen.getByRole("heading", { name: "Admin" })).toBeInTheDocument();
   });
 
+  it("centers the buttons of the main row and of the section", () => {
+    render(
+      <ActionBand section={{ title: "Admin", children: <ActionButton icon={<svg />} label="Add" /> }}>
+        <ActionButton icon={<svg />} label="Play" />
+      </ActionBand>,
+    );
+    expect(screen.getByRole("button", { name: "Play" }).parentElement).toHaveClass("justify-center");
+    expect(screen.getByRole("button", { name: "Add" }).parentElement).toHaveClass("justify-center");
+  });
+
   it("styles its section title like panel section titles and field labels", () => {
     render(
       <>
