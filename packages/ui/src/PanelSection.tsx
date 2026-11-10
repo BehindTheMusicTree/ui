@@ -15,7 +15,7 @@ export function PanelSection({ title, children, defaultOpen = true, className }:
   const [open, setOpen] = useState(defaultOpen);
   const contentId = useId();
   return (
-    <section className={cn("pl-3 pr-6 pb-2.5", className)}>
+    <section className={className}>
       <h3 className="mt-2.5">
         <button
           type="button"

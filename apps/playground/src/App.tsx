@@ -15,6 +15,7 @@ import {
   DetailPanel,
   Breadcrumb,
   PanelSection,
+  PanelBleed,
   useObscuredInset,
 } from "@behindthemusictree/ui";
 import { FaStar } from "react-icons/fa";
@@ -56,6 +57,10 @@ function DetailPanelDemo() {
             }}
           >
             <PanelSection title="About">Detail panel body.</PanelSection>
+            <PanelBleed padded className="border-y border-[var(--color-border)] py-2">
+              Bleed band
+            </PanelBleed>
+            <PanelSection title="History">Second section.</PanelSection>
           </DetailPanel>
         )}
       </div>

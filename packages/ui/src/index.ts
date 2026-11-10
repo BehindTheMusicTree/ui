@@ -25,3 +25,5 @@ export * from "./SearchCombobox";
 export * from "./PanelEdgeTab";
 export * from "./useObscuredInset";
 export * from "./ActionBand";
+export * from "./PanelBleed";
+export * from "./PanelStack";

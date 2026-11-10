@@ -17,6 +17,8 @@ import { IconButton } from "./IconButton";
 import { PanelEdgeTab, PanelEdgeTabProps } from "./PanelEdgeTab";
 
 const SHEET_DRAG_THRESHOLD_PX = 32;
+// Owns the panel's horizontal margin and the vertical rhythm between sections; see the DetailPanel doc.
+const BODY_FLOW = "flex flex-col gap-panel-gap px-panel-x pt-2 pb-4 [&>*]:shrink-0";
 const SCROLL_AREA = "[scrollbar-color:var(--color-text-muted)_transparent] [scrollbar-width:thin] [&::-webkit-scrollbar]:w-1.5 [&::-webkit-scrollbar-track]:bg-transparent [&::-webkit-scrollbar-thumb]:rounded-full [&::-webkit-scrollbar-thumb]:border-0 [&::-webkit-scrollbar-thumb]:bg-[var(--color-text-muted)]";
 
 /** Whether an Escape press belongs to something else: a field being edited, a modal, or another handler. */
@@ -66,6 +68,9 @@ export interface DetailPanelProps extends Omit<HTMLAttributes<HTMLElement>, "tit
 
 /**
  * Floating card pinned to one side of its (relatively positioned) canvas, sized by the brand layout tokens.
+ * The body (and each column in aside mode) sets the horizontal margin and the vertical gap between its direct
+ * children, which are the sections. Sections carry no outer padding of their own; wrap anything that must touch
+ * the panel edges (dividers, action bands) in `PanelBleed`, and a wrapper that must keep the rhythm in `PanelStack`.
  * The forwarded ref targets the positioned wrapper (panel plus edge tab), the box `useObscuredInset` measures.
  */
 export const DetailPanel = forwardRef<HTMLDivElement, DetailPanelProps>(function DetailPanel(
@@ -201,7 +206,7 @@ export const DetailPanel = forwardRef<HTMLDivElement, DetailPanelProps>(function
         <header
           style={accentStyle}
           className={cn(
-            "flex shrink-0 items-center gap-2 px-6 pb-2 pt-4",
+            "flex shrink-0 items-center gap-2 px-panel-x pb-2 pt-4",
             titleInSearch && "justify-end",
             // A peeking mobile sheet sits below the search field, so only taller panels need to clear it.
             titleInSearch &&
@@ -230,11 +235,11 @@ export const DetailPanel = forwardRef<HTMLDivElement, DetailPanelProps>(function
               bodyClassName,
             )}
           >
-            <div className={cn("pb-4 md:min-h-0 md:overflow-y-auto md:border-r md:border-[var(--color-border)]", SCROLL_AREA)}>{aside}</div>
-            <div className={cn("pb-4 md:min-h-0 md:overflow-y-auto", SCROLL_AREA)}>{children}</div>
+            <div className={cn(BODY_FLOW, "md:min-h-0 md:overflow-y-auto md:border-r md:border-[var(--color-border)]", SCROLL_AREA)}>{aside}</div>
+            <div className={cn(BODY_FLOW, "md:min-h-0 md:overflow-y-auto", SCROLL_AREA)}>{children}</div>
           </div>
         ) : (
-          <div className={cn("min-h-0 flex-1 overflow-y-auto pb-4", SCROLL_AREA, bodyClassName)}>{children}</div>
+          <div className={cn("min-h-0 flex-1 overflow-y-auto", BODY_FLOW, SCROLL_AREA, bodyClassName)}>{children}</div>
         )}
       </aside>
       {edgeTab && (
