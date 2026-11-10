@@ -12,7 +12,7 @@ Format based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 ### Changed
 
-- `placeLabels` throws on a non-finite or inverted box, or a NaN priority or tier, instead of silently dropping the box from its index. `±Infinity` priorities and zero-size boxes stay valid. No known caller passed such input.
+- `placeLabels` throws on a non-finite or inverted box, or a NaN priority or tier, instead of silently mis-placing labels (a NaN or infinite box never entered the index, an inverted one never overlapped anything). `±Infinity` priorities and zero-size boxes stay valid. A caller feeding NaN (for example a NaN rank from missing data) now gets an error naming the item rather than an unlabelled item.
 
 ## [0.21.1] - 2026-11-10
 

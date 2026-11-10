@@ -88,6 +88,25 @@ describe("placeLabels tiers", () => {
     expect(placement.get("context")).toBe(-1);
   });
 
+  it("keeps tiers and infinite priorities independent", () => {
+    const placement = placeLabels([
+      { id: "context", labels: [box(0, 0, 50, 10)], priority: Infinity, tier: -1 },
+      { id: "focus", labels: [box(20, 0, 70, 10)], priority: -Infinity },
+    ]);
+    expect(placement.get("focus")).toBe(0);
+    expect(placement.get("context")).toBe(-1);
+  });
+
+  it("falls back to the first candidate for a forced dotless item and still blocks later labels", () => {
+    const placement = placeLabels([
+      { id: "blocker", labels: [box(0, 0, 50, 10)], priority: Infinity, forced: true },
+      { id: "forced", labels: [box(10, 0, 60, 10)], priority: 1, forced: true },
+      { id: "low", labels: [box(20, 0, 70, 10)], dot: farDot(0), priority: 0 },
+    ]);
+    expect(placement.get("forced")).toBe(0);
+    expect(placement.get("low")).toBe(-1);
+  });
+
   it("orders by priority alone when no tier is given", () => {
     const placement = placeLabels([
       { id: "low", labels: [box(0, 0, 50, 10)], priority: 1 },

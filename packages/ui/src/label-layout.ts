@@ -90,7 +90,8 @@ export interface LabelPlacementItem {
   /** Order within a `tier`: higher is placed first. May be `±Infinity`, never NaN. */
   priority: number;
   /** Placement band, default 0: every item of a higher tier is placed before any item of a lower one,
-   * whatever their priorities, so a whole category (faded context) yields without priority arithmetic. */
+   * whatever their priorities, so a whole category (faded context) yields without priority arithmetic.
+   * May be `±Infinity`, never NaN. */
   tier?: number;
   /** Drawn even when no candidate is free: falls back to the first one and still blocks later labels. */
   forced?: boolean;
