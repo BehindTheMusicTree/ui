@@ -3,6 +3,7 @@
 import { ReactNode, useId, useState } from "react";
 import { ChevronDown } from "lucide-react";
 import { cn } from "./class-name";
+import { PANEL_LABEL_CLASS, PANEL_LABEL_CONTENT_GAP_CLASS } from "./panel-label";
 
 export interface PanelSectionProps {
   title: ReactNode;
@@ -22,7 +23,7 @@ export function PanelSection({ title, children, defaultOpen = true, className }:
           aria-expanded={open}
           aria-controls={contentId}
           onClick={() => setOpen((isOpen) => !isOpen)}
-          className="flex items-center justify-between w-full text-[0.6875rem] font-semibold uppercase text-[var(--color-text-muted)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-focus-ring)]"
+          className={cn("flex items-center justify-between w-full", PANEL_LABEL_CLASS, "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-focus-ring)]")}
         >
           {title}
           <ChevronDown
@@ -32,7 +33,7 @@ export function PanelSection({ title, children, defaultOpen = true, className }:
         </button>
       </h3>
       {open && (
-        <div id={contentId} className="mt-1.5 divide-y divide-[var(--color-border)]">
+        <div id={contentId} className={cn(PANEL_LABEL_CONTENT_GAP_CLASS, "divide-y divide-[var(--color-border)]")}>
           {children}
         </div>
       )}

@@ -1,6 +1,9 @@
 import { fireEvent, render, screen } from "@testing-library/react";
 import { describe, expect, it, vi } from "vitest";
 import { ActionBand, ActionButton } from "./ActionBand";
+import { FieldList } from "./FieldList";
+import { PANEL_LABEL_CLASS, PANEL_LABEL_CONTENT_GAP_CLASS } from "./panel-label";
+import { PanelSection } from "./PanelSection";
 
 describe("ActionBand", () => {
   it("renders nothing without content", () => {
@@ -45,5 +48,24 @@ describe("ActionBand", () => {
     );
     expect(screen.getByRole("region", { name: "Admin actions" })).toBeInTheDocument();
     expect(screen.getByRole("heading", { name: "Admin" })).toBeInTheDocument();
+  });
+
+  it("styles its section title like panel section titles and field labels", () => {
+    render(
+      <>
+        <ActionBand section={{ title: "Admin", children: <ActionButton icon={<svg />} label="Add" /> }} />
+        <PanelSection title="Summary">Text</PanelSection>
+        <FieldList items={[{ label: "Links", value: "x" }]} />
+      </>,
+    );
+    const labels = [screen.getByRole("heading", { name: "Admin" }), screen.getByRole("button", { name: "Summary" }), screen.getByText("Links")];
+    for (const label of labels) expect(label).toHaveClass(...PANEL_LABEL_CLASS.split(" "));
+
+    const contents = [
+      screen.getByRole("heading", { name: "Admin" }).nextElementSibling,
+      screen.getByText("Text"),
+      screen.getByText("Links").nextElementSibling,
+    ];
+    for (const content of contents) expect(content).toHaveClass(PANEL_LABEL_CONTENT_GAP_CLASS);
   });
 });
