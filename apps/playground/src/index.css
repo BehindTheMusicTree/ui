@@ -3,10 +3,3 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-
-/* Tokens added in brand 12.10; drop once the playground depends on a release that ships them. */
-:root {
-  --layout-panel-edge: var(--layout-gutter);
-  --layout-sheet-peek: 40%;
-  --layout-panel-aside-w: 20rem;
-}

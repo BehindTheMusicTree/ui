@@ -13,7 +13,7 @@ export interface FieldListProps {
 
 export function FieldList({ items, className }: FieldListProps) {
   return (
-    <dl className={cn("px-6 divide-y divide-[var(--color-border)]", className)}>
+    <dl className={cn("divide-y divide-[var(--color-border)]", className)}>
       {items.map((item) => (
         <div key={item.label} className="py-2.5">
           <dt className="text-[0.6875rem] font-semibold uppercase text-[var(--color-text-muted)]">{item.label}</dt>

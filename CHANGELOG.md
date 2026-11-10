@@ -5,8 +5,15 @@ Format based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 ## [Unreleased]
 
+### Changed
+
+- **Breaking:** the `DetailPanel` body (and each column in aside mode) now sets the horizontal margin (`px-panel-x`) and the vertical gap between its direct children (`gap-panel-gap`); the header uses `px-panel-x`. `PanelSection` and `FieldList` no longer carry their own padding, so content must drop its section-level horizontal and vertical padding or the margin doubles. `ActionBand` and anything else that must touch the panel edges now needs a `PanelBleed`; in aside mode `bodyClassName` still targets the outer grid, not the columns. Requires brand `^12.12.0`.
+
 ### Added
 
+- `cn` knows the brand `panel-x` and `panel-gap` spacing keys, so overriding them through `className` works.
+- `PanelBleed`: cancels the body margin so a divider, band or border touches the panel edges; `padded` re-applies the margin inside.
+- `PanelStack`: a wrapper that keeps the panel gap between its children, for content that needs a root element.
 - `ActionBand` and `ActionButton`: a vertically centered row of icon buttons with an optional caption (such as a playable count), disabled state and tooltip, plus an optional titled section.
 
 ## [0.20.0] - 2026-11-09

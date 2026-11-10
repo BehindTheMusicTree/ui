@@ -2,6 +2,8 @@ import { fireEvent, render, screen } from "@testing-library/react";
 import { createRef } from "react";
 import { describe, expect, it, vi } from "vitest";
 import { DetailPanel } from "./DetailPanel";
+import { PanelBleed } from "./PanelBleed";
+import { PanelStack } from "./PanelStack";
 
 function setup(props: Partial<React.ComponentProps<typeof DetailPanel>> = {}) {
   const onClose = vi.fn();
@@ -182,5 +184,43 @@ describe("DetailPanel", () => {
       fireEvent.click(button);
       expect(onClick).toHaveBeenCalled();
     });
+  });
+
+  describe("body spacing", () => {
+    it("sets the horizontal margin and section gap on the body", () => {
+      setup();
+      expect(screen.getByText("body").parentElement).toHaveClass("px-panel-x", "gap-panel-gap");
+    });
+
+    it("sets them on the header", () => {
+      setup();
+      expect(screen.getByRole("heading", { name: "Rock" }).parentElement).toHaveClass("px-panel-x");
+    });
+
+    it("sets them on both aside columns", () => {
+      setup({ expanded: true, aside: <p>side</p> });
+      expect(screen.getByText("body").parentElement).toHaveClass("px-panel-x", "gap-panel-gap");
+      expect(screen.getByText("side").parentElement).toHaveClass("px-panel-x", "gap-panel-gap");
+    });
+  });
+});
+
+describe("PanelBleed", () => {
+  it("cancels the panel margin", () => {
+    render(<PanelBleed data-testid="bleed" />);
+    expect(screen.getByTestId("bleed")).toHaveClass("-mx-panel-x");
+    expect(screen.getByTestId("bleed")).not.toHaveClass("px-panel-x");
+  });
+
+  it("re-applies the margin inside when padded", () => {
+    render(<PanelBleed padded data-testid="bleed" />);
+    expect(screen.getByTestId("bleed")).toHaveClass("-mx-panel-x", "px-panel-x");
+  });
+});
+
+describe("PanelStack", () => {
+  it("keeps the panel gap between its children", () => {
+    render(<PanelStack data-testid="stack" className="extra" />);
+    expect(screen.getByTestId("stack")).toHaveClass("flex", "flex-col", "gap-panel-gap", "extra");
   });
 });
