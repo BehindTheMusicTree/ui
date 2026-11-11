@@ -9,6 +9,10 @@ Format based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 - `ActionBand` centers its buttons, in the main row and in the titled section; the section title stays left-aligned.
 
+### CI
+
+- Pin the shared release workflows to the lag-tolerant github-workflows commit 79c1362, so tag creation tolerates GitHub read-after-write delays.
+
 ## [0.21.2] - 2026-11-10
 
 ### Added
