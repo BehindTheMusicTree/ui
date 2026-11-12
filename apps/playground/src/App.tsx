@@ -10,6 +10,7 @@ import {
   Card,
   Alert,
   EmptyState,
+  StepList,
   TextLink,
   Page,
   Table,
@@ -109,6 +110,15 @@ function PageAndFormDemo() {
           <Alert variant="error">Error message</Alert>
           <Alert variant="success">Success message</Alert>
           <EmptyState title="No results" description="Try another filter" />
+          <StepList
+            aria-label="Steps"
+            statusLabels={{ pending: "upcoming", current: "in progress", done: "done", failed: "failed" }}
+            steps={[
+              { key: "fetch", label: "Fetch", status: "done" },
+              { key: "upload", label: "Upload", status: "current", detail: "3/10" },
+              { key: "merge", label: "Merge", status: "pending" },
+            ]}
+          />
         </Page>
       </div>
     </section>

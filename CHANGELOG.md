@@ -5,6 +5,10 @@ Format based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 ## [Unreleased]
 
+### Added
+
+- `StepList`: ordered list of steps with `pending | current | done | failed` status icons, `aria-current="step"` on the current step, an optional per-step detail and consumer-supplied screen-reader status labels.
+
 ## [0.22.0] - 2026-11-12
 
 ### Added
