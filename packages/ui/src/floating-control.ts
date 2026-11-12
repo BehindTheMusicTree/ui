@@ -7,3 +7,10 @@ export const floatingControlCardClassName =
 
 export const floatingControlCellClassName =
   "h-8 w-8 [@media(pointer:coarse)]:h-[var(--layout-touch-target)] [@media(pointer:coarse)]:w-[var(--layout-touch-target)]";
+
+/** Selected / unselected look of a floating cell, shared by every pressed-state control. */
+export function floatingControlCellStateClassName(selected: boolean): string {
+  return selected
+    ? "text-[var(--color-text)] bg-[var(--color-surface-muted)] ring-1 ring-inset ring-[var(--color-border)]"
+    : "text-[var(--color-text-muted)] enabled:hover:text-[var(--color-text)] enabled:hover:bg-[var(--color-surface-muted)]";
+}

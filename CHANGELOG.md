@@ -5,6 +5,14 @@ Format based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 ## [Unreleased]
 
+### Added
+
+- `FloatingToggle`: single-cell floating card with an `aria-pressed` icon button, the on/off counterpart of the `floating` `SegmentedControl`, for placing beside `ZoomControls`.
+
+### Changed
+
+- `floatingControlCellStateClassName` in `floating-control.ts` now holds the selected/unselected cell styles shared by `SegmentedControl` and `FloatingToggle`.
+
 ## [0.23.0] - 2026-11-12
 
 ### Added
