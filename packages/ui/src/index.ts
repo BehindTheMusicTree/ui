@@ -40,3 +40,4 @@ export * from "./Alert";
 export * from "./EmptyState";
 export * from "./TextLink";
 export * from "./Page";
+export * from "./StepList";
