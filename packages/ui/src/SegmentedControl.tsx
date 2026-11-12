@@ -2,7 +2,11 @@
 
 import { ReactNode } from "react";
 import { cn } from "./class-name";
-import { floatingControlCardClassName, floatingControlCellClassName } from "./floating-control";
+import {
+  floatingControlCardClassName,
+  floatingControlCellClassName,
+  floatingControlCellStateClassName,
+} from "./floating-control";
 
 export interface SegmentedControlOption<T extends string> {
   value: T;
@@ -62,17 +66,11 @@ export function SegmentedControl<T extends string>({
               floating
                 ? cn("inline-flex items-center justify-center rounded-md", floatingControlCellClassName)
                 : "rounded px-3 py-1 text-sm [@media(pointer:coarse)]:min-h-[var(--layout-touch-target)] [@media(pointer:coarse)]:px-4",
-              selected
-                ? cn(
-                    "text-[var(--color-text)]",
-                    floating
-                      ? "bg-[var(--color-surface-muted)] ring-1 ring-inset ring-[var(--color-border)]"
-                      : "bg-[var(--color-surface)] font-medium shadow-sm",
-                  )
-                : cn(
-                    "text-[var(--color-text-muted)] enabled:hover:text-[var(--color-text)]",
-                    floating && "enabled:hover:bg-[var(--color-surface-muted)]",
-                  ),
+              floating
+                ? floatingControlCellStateClassName(selected)
+                : selected
+                  ? "bg-[var(--color-surface)] font-medium text-[var(--color-text)] shadow-sm"
+                  : "text-[var(--color-text-muted)] enabled:hover:text-[var(--color-text)]",
             )}
           >
             {option.label}

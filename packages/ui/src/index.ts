@@ -6,6 +6,7 @@ export * from "./Button";
 export * from "./IconTextButton";
 export * from "./IconButton";
 export * from "./Avatar";
+export * from "./FloatingToggle";
 export * from "./SegmentedControl";
 export * from "./PanelSection";
 export * from "./ZoomControls";
