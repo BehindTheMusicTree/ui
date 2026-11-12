@@ -1,5 +1,5 @@
 @import "@behindthemusictree/brand/tokens/theme.css";
-
+@import "@behindthemusictree/brand/styles";
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
