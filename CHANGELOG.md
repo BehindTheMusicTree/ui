@@ -5,6 +5,8 @@ Format based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 ## [Unreleased]
 
+## [0.22.0] - 2026-11-12
+
 ### Added
 
 - `Page` (document and canvas layouts, default/narrow/full width, title, description and actions slots) for pages that sit under the floating navigation band.
