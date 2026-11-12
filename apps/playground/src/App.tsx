@@ -3,6 +3,15 @@ import {
   Button,
   IconTextButton,
   Input,
+  Select,
+  Textarea,
+  Checkbox,
+  Field,
+  Card,
+  Alert,
+  EmptyState,
+  TextLink,
+  Page,
   Table,
   TableHeader,
   TableBody,
@@ -68,6 +77,44 @@ function DetailPanelDemo() {
   );
 }
 
+function PageAndFormDemo() {
+  return (
+    <section className="flex flex-col gap-4">
+      <h2 className="text-lg font-semibold">Page and form primitives</h2>
+      <div className="relative h-96 overflow-hidden rounded-lg border border-[var(--color-border)]">
+        <Page
+          title="Curation"
+          description="Document layout, default width"
+          actions={<Button>New edge</Button>}
+          className="!pt-4"
+        >
+          <Card title="Edge" description="Form fields" actions={<TextLink href="#top">Docs</TextLink>}>
+            <Field label="Name" hint="Shown publicly">
+              <Input placeholder="Genre name" />
+            </Field>
+            <Field label="Kind" error="Pick a kind">
+              <Select defaultValue="">
+                <option value="">Choose…</option>
+                <option value="parent">Parent</option>
+              </Select>
+            </Field>
+            <Field label="Notes">
+              <Textarea />
+            </Field>
+            <label className="flex items-center gap-2 text-sm">
+              <Checkbox /> Mark as reviewed
+            </label>
+          </Card>
+          <Alert variant="info">Info message</Alert>
+          <Alert variant="error">Error message</Alert>
+          <Alert variant="success">Success message</Alert>
+          <EmptyState title="No results" description="Try another filter" />
+        </Page>
+      </div>
+    </section>
+  );
+}
+
 function BreadcrumbDemo() {
   const path = ["Rock", "Punk", "Hardcore", "Crust", "D-beat"];
   const [depth, setDepth] = useState(path.length);
@@ -126,6 +173,8 @@ export function App() {
         <Skeleton className="h-8 w-32" />
         <RingLoader />
       </section>
+
+      <PageAndFormDemo />
 
       <BreadcrumbDemo />
 
