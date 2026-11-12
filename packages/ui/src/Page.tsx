@@ -6,9 +6,11 @@ export interface PageProps extends Omit<React.HTMLAttributes<HTMLElement>, "titl
   title: React.ReactNode;
   /** Keeps the h1 for assistive tech but hides it (e.g. a canvas page with its own chrome). */
   visuallyHiddenTitle?: boolean;
+  /** Document layout only; ignored by `canvas`. */
   description?: React.ReactNode;
-  /** Header slot, right-aligned next to the title. */
+  /** Header slot, right-aligned next to the title. Document layout only; ignored by `canvas`. */
   actions?: React.ReactNode;
+  /** Document layout only; `canvas` always fills its container. */
   width?: "default" | "narrow" | "full";
   /** `document` scrolls in a centred column; `canvas` fills the viewport for maps and trees. */
   layout?: "document" | "canvas";

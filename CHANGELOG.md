@@ -14,6 +14,7 @@ Format based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 ### Changed
 
 - `Table` uses the brand surface and border tokens instead of the undefined `bg-muted`, `text-muted-foreground` and default border colour, so row hover and footer styles now render.
+- `Input` shows a red border while `aria-invalid="true"` (set by `Field` on error).
 - Requires `@behindthemusictree/brand` ^12.13.0 (page width tokens and base styles).
 - `ActionBand` centers its buttons, in the main row and in the titled section; the section title stays left-aligned.
 

@@ -52,6 +52,26 @@ describe("Field", () => {
     expect(select).toHaveAccessibleDescription("Extra Pick one");
   });
 
+  it("describes the control by the hint alone and keeps its own id", () => {
+    render(
+      <Field label="Name" hint="Only a hint">
+        <Input id="own" />
+      </Field>,
+    );
+    const input = screen.getByLabelText("Name");
+    expect(input).toHaveAttribute("id", "own");
+    expect(input).toHaveAccessibleDescription("Only a hint");
+  });
+
+  it("leaves a child's own aria-invalid when there is no error", () => {
+    render(
+      <Field label="Name">
+        <Input aria-invalid="true" />
+      </Field>,
+    );
+    expect(screen.getByLabelText("Name")).toHaveAttribute("aria-invalid", "true");
+  });
+
   it("works with Textarea", () => {
     render(
       <Field label="Notes">

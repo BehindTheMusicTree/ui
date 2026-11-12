@@ -45,4 +45,14 @@ describe("Page", () => {
     render(<Page title="T" data-testid="p">x</Page>);
     expect(screen.getByTestId("p")).toBeInTheDocument();
   });
+
+  it("keeps an sr-only h1 inside the header when a hidden title has actions", () => {
+    render(
+      <Page title="Map" visuallyHiddenTitle actions={<button>Go</button>}>
+        x
+      </Page>,
+    );
+    expect(screen.getByRole("heading", { level: 1, name: "Map" }).className).toContain("sr-only");
+    expect(screen.getByRole("button", { name: "Go" })).toBeInTheDocument();
+  });
 });
