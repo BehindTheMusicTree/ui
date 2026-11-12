@@ -5,6 +5,8 @@ Format based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 ## [Unreleased]
 
+## [0.24.0] - 2026-11-12
+
 ### Added
 
 - `FloatingToggle`: single-cell floating card with an `aria-pressed` icon button, the on/off counterpart of the `floating` `SegmentedControl`, for placing beside `ZoomControls`.
