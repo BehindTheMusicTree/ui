@@ -5,7 +5,11 @@ Format based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 ## [Unreleased]
 
+## [0.25.0] - 2026-11-13
+
 ### Added
+
+- `DetailPanel.cover`: full-width cover content that scrolls with the body and starts behind a floating search field when `titleInSearch` is set.
 
 - `SearchCombobox` accepts a trailing action in place of its search indicator, optionally restricted to screens below `sm` or `md`, while keeping Clear and loading feedback available.
 

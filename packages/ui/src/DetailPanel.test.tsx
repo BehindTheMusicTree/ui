@@ -54,6 +54,32 @@ describe("DetailPanel", () => {
     });
   });
 
+  describe("cover", () => {
+    it("puts the cover and body in the same scroller behind the floating search", () => {
+      setup({ titleInSearch: true, cover: <img src="/cover.jpg" alt="Rock cover" /> });
+      const cover = screen.getByRole("img", { name: "Rock cover" });
+      const scroller = cover.closest("[data-panel-cover-scroll]");
+      expect(scroller).toContainElement(screen.getByText("body"));
+      expect(screen.getByRole("banner")).toHaveClass("absolute");
+      expect(screen.getByRole("heading", { name: "Rock" })).toHaveClass("sr-only");
+    });
+
+    it("keeps the normal header when there is no floating search", () => {
+      setup({ cover: <img src="/cover.jpg" alt="Rock cover" /> });
+      expect(screen.getByRole("banner")).not.toHaveClass("absolute");
+      expect(screen.getByRole("button", { name: "Close" })).toBeInTheDocument();
+    });
+
+    it("keeps both columns and expansion controls with a cover", () => {
+      const onExpandedChange = vi.fn();
+      setup({ titleInSearch: true, cover: <img src="/cover.jpg" alt="Rock cover" />, expanded: true, aside: <p>Family</p>, onExpandedChange });
+      expect(screen.getByText("Family")).toBeInTheDocument();
+      expect(screen.getByText("body")).toBeInTheDocument();
+      fireEvent.keyDown(document, { key: "Escape" });
+      expect(onExpandedChange).toHaveBeenCalledWith(false);
+    });
+  });
+
   it("makes the panel inert while collapsed", () => {
     setup({ collapsed: true });
     expect(screen.getByLabelText("Rock", { selector: "aside" })).toHaveAttribute("inert");
