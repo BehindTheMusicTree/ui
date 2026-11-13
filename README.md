@@ -43,3 +43,5 @@ Bumps the package version, moves `CHANGELOG.md`'s `[Unreleased]` section under t
 tags, and pushes — which triggers `.github/workflows/publish.yml` to publish the version on npm.
 
 See [CONTRIBUTING.md](CONTRIBUTING.md) for the full workflow.
+
+`DetailPanel` accepts a `cover` slot for a full-width image above its body. With `titleInSearch`, the cover starts at the panel’s top edge behind the host’s floating search field; header controls remain overlaid and the title remains available to assistive technology. Put image credits in the body.

@@ -48,6 +48,8 @@ export interface DetailPanelProps extends Omit<HTMLAttributes<HTMLElement>, "tit
    * assistive tech only, the close button goes, and the header clears the field. Escape and the sheet drag still close.
    */
   titleInSearch?: boolean;
+  /** Full-width cover above the body; with titleInSearch it starts behind the floating search field. */
+  cover?: ReactNode;
   /** Grows the panel across the canvas up to the opposite column; `aside` becomes a second column. */
   expanded?: boolean;
   /** Called when Escape leaves expanded mode. */
@@ -83,6 +85,7 @@ export const DetailPanel = forwardRef<HTMLDivElement, DetailPanelProps>(function
     headerStart,
     headerAccent,
     titleInSearch = false,
+    cover,
     expanded = false,
     onExpandedChange,
     aside,
@@ -148,6 +151,23 @@ export const DetailPanel = forwardRef<HTMLDivElement, DetailPanelProps>(function
     ? { backgroundColor: headerAccent.background, color: headerAccent.color }
     : undefined;
   const hasAside = expanded && aside != null;
+  const hasCover = cover != null;
+  const overlayHeader = hasCover && titleInSearch;
+
+  const body = hasAside ? (
+    <div
+      className={cn(
+        "min-h-0 flex-1 overflow-y-auto md:grid md:grid-cols-[var(--layout-panel-aside-w)_minmax(0,1fr)] md:overflow-hidden",
+        SCROLL_AREA,
+        bodyClassName,
+      )}
+    >
+      <div className={cn(BODY_FLOW, "md:min-h-0 md:overflow-y-auto md:border-r md:border-[var(--color-border)]", SCROLL_AREA)}>{aside}</div>
+      <div className={cn(BODY_FLOW, "md:min-h-0 md:overflow-y-auto", SCROLL_AREA)}>{children}</div>
+    </div>
+  ) : (
+    <div className={cn("min-h-0 flex-1 overflow-y-auto", BODY_FLOW, SCROLL_AREA, bodyClassName)}>{children}</div>
+  );
 
   return (
     <div
@@ -181,7 +201,7 @@ export const DetailPanel = forwardRef<HTMLDivElement, DetailPanelProps>(function
         ref={panelRef}
         id={panelId}
         className={cn(
-          "flex h-full w-full flex-col overflow-hidden rounded-[var(--radius-panel)] bg-[var(--color-surface)] text-body text-[var(--color-text)] shadow-[0_1px_2px_rgba(60,64,67,0.3),0_2px_6px_2px_rgba(60,64,67,0.15)]",
+          "relative flex h-full w-full flex-col overflow-hidden rounded-[var(--radius-panel)] bg-[var(--color-surface)] text-body text-[var(--color-text)] shadow-[0_1px_2px_rgba(60,64,67,0.3),0_2px_6px_2px_rgba(60,64,67,0.15)]",
           // Hides only the panel body once the slide-out ends, so the edge tab stays reachable to reopen it.
           "transition-[visibility] duration-200 motion-reduce:transition-none",
           collapsed && "invisible delay-200",
@@ -200,11 +220,11 @@ export const DetailPanel = forwardRef<HTMLDivElement, DetailPanelProps>(function
             onPointerCancel={() => (grabberDragRef.current = null)}
             onKeyDown={() => (grabberDragRef.current = null)}
             onClick={onGrabberClick}
-            className="hidden h-[var(--layout-touch-target)] w-full shrink-0 cursor-grab touch-none items-center justify-center text-[var(--color-text-muted)] before:h-1 before:w-9 before:rounded-full before:bg-current before:opacity-40 before:content-[''] max-md:flex"
+            className={cn("hidden h-[var(--layout-touch-target)] w-full shrink-0 cursor-grab touch-none items-center justify-center text-[var(--color-text-muted)] before:h-1 before:w-9 before:rounded-full before:bg-current before:opacity-40 before:content-[''] max-md:flex", overlayHeader && "absolute inset-x-0 top-0 z-10")}
           />
         )}
         <header
-          style={accentStyle}
+          style={overlayHeader ? undefined : accentStyle}
           className={cn(
             "flex shrink-0 items-center gap-2 px-panel-x pb-2 pt-4",
             titleInSearch && "justify-end",
@@ -213,6 +233,7 @@ export const DetailPanel = forwardRef<HTMLDivElement, DetailPanelProps>(function
               (isSheet && !sheetFull
                 ? "md:pt-search-clear"
                 : "pt-search-clear"),
+            overlayHeader && "pointer-events-none absolute inset-x-0 top-0 z-20 [&>*]:pointer-events-auto",
             headerClassName,
           )}
         >
@@ -227,20 +248,12 @@ export const DetailPanel = forwardRef<HTMLDivElement, DetailPanelProps>(function
             </IconButton>
           )}
         </header>
-        {hasAside ? (
-          <div
-            className={cn(
-              "min-h-0 flex-1 overflow-y-auto md:grid md:grid-cols-[var(--layout-panel-aside-w)_minmax(0,1fr)] md:overflow-hidden",
-              SCROLL_AREA,
-              bodyClassName,
-            )}
-          >
-            <div className={cn(BODY_FLOW, "md:min-h-0 md:overflow-y-auto md:border-r md:border-[var(--color-border)]", SCROLL_AREA)}>{aside}</div>
-            <div className={cn(BODY_FLOW, "md:min-h-0 md:overflow-y-auto", SCROLL_AREA)}>{children}</div>
+        {hasCover ? (
+          <div className={cn("min-h-0 flex-1 overflow-y-auto", SCROLL_AREA, hasAside && "md:flex md:flex-col md:overflow-hidden")} data-panel-cover-scroll="">
+            <div className="w-full shrink-0" data-panel-cover="">{cover}</div>
+            {body}
           </div>
-        ) : (
-          <div className={cn("min-h-0 flex-1 overflow-y-auto", BODY_FLOW, SCROLL_AREA, bodyClassName)}>{children}</div>
-        )}
+        ) : body}
       </aside>
       {edgeTab && (
         <div
