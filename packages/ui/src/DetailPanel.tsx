@@ -157,16 +157,16 @@ export const DetailPanel = forwardRef<HTMLDivElement, DetailPanelProps>(function
   const body = hasAside ? (
     <div
       className={cn(
-        "min-h-0 flex-1 overflow-y-auto md:grid md:grid-cols-[var(--layout-panel-aside-w)_minmax(0,1fr)] md:overflow-hidden",
+        hasCover ? "md:grid md:grid-cols-[var(--layout-panel-aside-w)_minmax(0,1fr)]" : "min-h-0 flex-1 overflow-y-auto md:grid md:grid-cols-[var(--layout-panel-aside-w)_minmax(0,1fr)] md:overflow-hidden",
         SCROLL_AREA,
         bodyClassName,
       )}
     >
-      <div className={cn(BODY_FLOW, "md:min-h-0 md:overflow-y-auto md:border-r md:border-[var(--color-border)]", SCROLL_AREA)}>{aside}</div>
-      <div className={cn(BODY_FLOW, "md:min-h-0 md:overflow-y-auto", SCROLL_AREA)}>{children}</div>
+      <div className={cn(BODY_FLOW, "md:border-r md:border-[var(--color-border)]", !hasCover && "md:min-h-0 md:overflow-y-auto", SCROLL_AREA)}>{aside}</div>
+      <div className={cn(BODY_FLOW, !hasCover && "md:min-h-0 md:overflow-y-auto", SCROLL_AREA)}>{children}</div>
     </div>
   ) : (
-    <div className={cn("min-h-0 flex-1 overflow-y-auto", BODY_FLOW, SCROLL_AREA, bodyClassName)}>{children}</div>
+    <div className={cn(!hasCover && "min-h-0 flex-1 overflow-y-auto", BODY_FLOW, SCROLL_AREA, bodyClassName)}>{children}</div>
   );
 
   return (
@@ -249,7 +249,7 @@ export const DetailPanel = forwardRef<HTMLDivElement, DetailPanelProps>(function
           )}
         </header>
         {hasCover ? (
-          <div className={cn("min-h-0 flex-1 overflow-y-auto", SCROLL_AREA, hasAside && "md:flex md:flex-col md:overflow-hidden")} data-panel-cover-scroll="">
+          <div className={cn("min-h-0 flex-1 overflow-y-auto", SCROLL_AREA)} data-panel-cover-scroll="">
             <div className="w-full shrink-0" data-panel-cover="">{cover}</div>
             {body}
           </div>
