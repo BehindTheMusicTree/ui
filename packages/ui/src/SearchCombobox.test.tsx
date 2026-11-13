@@ -14,6 +14,20 @@ const base = {
 };
 
 describe("SearchCombobox", () => {
+  it("keeps a trailing action, clear and loading feedback independently usable", () => {
+    const onAccount = vi.fn();
+    const onClear = vi.fn();
+    const onPick = vi.fn();
+    render(<SearchCombobox {...base} loading onClear={onClear} onPick={onPick}
+      trailingAction={<button type="button" onClick={onAccount}>Account</button>} trailingActionBreakpoint="md" />);
+    fireEvent.click(screen.getByRole("button", { name: "Account" }));
+    expect(onAccount).toHaveBeenCalledOnce();
+    expect(onPick).not.toHaveBeenCalled();
+    fireEvent.click(screen.getByRole("button", { name: "Clear search" }));
+    expect(onClear).toHaveBeenCalledOnce();
+    expect(screen.getByText("Searching…")).toBeInTheDocument();
+  });
+
   it("lists options and reports picks", () => {
     const onPick = vi.fn();
     render(<SearchCombobox {...base} onPick={onPick} />);
