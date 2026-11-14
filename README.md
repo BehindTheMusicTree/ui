@@ -47,3 +47,13 @@ See [CONTRIBUTING.md](CONTRIBUTING.md) for the full workflow.
 `DetailPanel` accepts a `cover` slot for a full-width image above its body. With `titleInSearch`, the cover starts at the panel’s top edge behind the host’s floating search field; header controls remain overlaid and the title remains available to assistive technology. Put image credits in the body.
 
 Run `pnpm test:browser` after `pnpm build` for Chromium panel layout regressions (install the browser with `pnpm exec playwright install chromium`). The playground fixture is available at `/?panelCover`; `expanded`, `tall` and `noCover` query flags exercise its variants.
+
+### Host-specific detail panel placement
+
+`useObscuredInset` normally follows the `DetailPanel` sheet and side props. If a host changes
+panel placement through responsive CSS, set `--detail-panel-obscured-edge` to `left`, `right`
+or `bottom` in those same rules (on the panel or an ancestor). The hook then measures the
+actual panel rectangle against that edge, including expanded panels. Collapsed panels
+still report no inset. Leave the property unset to retain the standard responsive layout.
+Invalid nonempty values throw. Insets update when the panel or its canvas resizes and when
+panel transitions finish.

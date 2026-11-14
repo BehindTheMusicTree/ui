@@ -15,10 +15,14 @@ function measure(panel: HTMLElement): ObscuredInset {
   if (!canvas || panel.dataset.collapsed === "true") return {};
   const panelRect = panel.getBoundingClientRect();
   const canvasRect = canvas.getBoundingClientRect();
-  if (panel.dataset.sheet === "true" && window.matchMedia(SHEET_QUERY).matches) {
+  const edge = window.getComputedStyle(panel).getPropertyValue("--detail-panel-obscured-edge").trim();
+  if (edge && edge !== "left" && edge !== "right" && edge !== "bottom") {
+    throw new Error(`Invalid --detail-panel-obscured-edge: ${edge}`);
+  }
+  if (edge === "bottom" || (!edge && panel.dataset.sheet === "true" && window.matchMedia(SHEET_QUERY).matches)) {
     return { bottom: Math.max(0, Math.round(canvasRect.bottom - panelRect.top)) };
   }
-  if (panel.dataset.side === "right") {
+  if (edge === "right" || (!edge && panel.dataset.side === "right")) {
     return { right: Math.max(0, Math.round(canvasRect.right - panelRect.left)) };
   }
   return { left: Math.max(0, Math.round(panelRect.right - canvasRect.left)) };
@@ -31,6 +35,8 @@ function sameInset(a: ObscuredInset, b: ObscuredInset): boolean {
 /**
  * Part of the canvas a `DetailPanel` currently covers, in px, for the panel's mode (side, sheet,
  * expanded, collapsed). Only the covered edge is set; a collapsed or unmounted panel covers nothing.
+ * Hosts that change the panel's placement through CSS must set `--detail-panel-obscured-edge`
+ * to `left`, `right` or `bottom` in the same rules. When unset, the sheet/side props choose the edge.
  * Pass the ref forwarded to `DetailPanel`; the panel must already be mounted when the host mounts
  * (keep it rendered and use `collapsed`, rather than conditionally mounting it).
  */
