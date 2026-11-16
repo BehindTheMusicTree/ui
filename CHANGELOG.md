@@ -9,6 +9,10 @@ Format based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 - **Agent directories**: Keep plans and scratch data out of Git while tracking the directory ignore rules.
 
+### CI
+
+- Pin validation to Ubuntu 24.04 so the installed Playwright version can run browser tests.
+
 ## [0.26.0] - 2026-11-14
 
 ### Added
