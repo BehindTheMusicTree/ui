@@ -5,6 +5,10 @@ Format based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 ## [Unreleased]
 
+### Fixed
+
+- **Agent directories**: Keep plans and scratch data out of Git while tracking the directory ignore rules.
+
 ## [0.26.0] - 2026-11-14
 
 ### Added
