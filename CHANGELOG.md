@@ -5,6 +5,10 @@ Format based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 ## [Unreleased]
 
+### Removed
+
+- Drop the tracked `.agent-plans/.gitignore`: plans now live in the common git directory.
+
 ### Fixed
 
 - **Agent directories**: Keep plans and scratch data out of Git while tracking the directory ignore rules.
