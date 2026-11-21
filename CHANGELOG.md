@@ -16,6 +16,7 @@ Format based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 ### CI
 
 - Pin validation to Ubuntu 24.04 so the installed Playwright version can run browser tests.
+- Add canonical workflow-level `concurrency` groups to `agent-drift`, `release-tag` and `validate`.
 
 ## [0.26.0] - 2026-11-14
 
