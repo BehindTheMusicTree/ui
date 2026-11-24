@@ -3,21 +3,6 @@
 All notable changes to `@behindthemusictree/ui` are documented here.
 Format based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
-## [Unreleased]
-
-### Removed
-
-- Drop the tracked `.agent-plans/.gitignore`: plans now live in the common git directory.
-
-### Fixed
-
-- **Agent directories**: Keep plans and scratch data out of Git while tracking the directory ignore rules.
-
-### CI
-
-- Pin validation to Ubuntu 24.04 so the installed Playwright version can run browser tests.
-- Add canonical workflow-level `concurrency` groups to `agent-drift`, `release-tag` and `validate`.
-
 ## [0.26.0] - 2026-11-14
 
 ### Added

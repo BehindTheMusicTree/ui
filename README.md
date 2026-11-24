@@ -35,12 +35,9 @@ pnpm dev     # builds the package in watch mode + runs apps/playground
 
 ## Release
 
-```bash
-pnpm release -- patch   # or minor / major
-```
-
-Bumps the package version, moves `CHANGELOG.md`'s `[Unreleased]` section under the new version,
-tags, and pushes — which triggers `.github/workflows/publish.yml` to publish the version on npm.
+Releases are automated with release-please: merging a `feat:` or `fix:` pull request into
+`main` opens a release PR that auto-merges once checks pass, then CI tags the version and
+publishes it on npm.
 
 See [CONTRIBUTING.md](CONTRIBUTING.md) for the full workflow.
 
