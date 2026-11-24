@@ -1,0 +1,1 @@
+{"concurrency":{"exemptions":[{"workflow":"publish.yml","form":"event","reason":"Every main push keeps its own run so a newer run cannot replace a pending release."}]}}
