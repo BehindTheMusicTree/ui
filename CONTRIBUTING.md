@@ -81,43 +81,34 @@ pnpm lint    # tsc --noEmit across the workspace
 pnpm test    # Vitest component tests
 ```
 
-All must pass before opening a PR. Release preparation and recovery fixtures also run in CI.
+All must pass before opening a PR.
 
 ### 6. Committing
 
 Use [Conventional Commits](https://www.conventionalcommits.org/) (`feat:`, `fix:`, `chore:`,
-`docs:`, `refactor:`) — the release script's changelog entries and the semver bump both key off
-the change being clearly described.
+`docs:`, `refactor:`) for the pull request title. Squash merges use that title as the commit
+subject, which determines the next release version and changelog entry.
 
 ### 7. Pull Request Process
 
 1. Ensure `pnpm build && pnpm lint` pass locally.
 2. Open a PR against `main` describing what changed and why.
-3. Add a bullet to `CHANGELOG.md` under `[Unreleased]` for any user-facing change (new export,
-   behavior change, breaking change).
+3. Give it a Conventional Commit title (checked by `pr-title.yml`). Do not edit `CHANGELOG.md`:
+   release-please generates it.
 
 ### 8. Releasing _(For Maintainers)_
 
-```bash
-pnpm release -- patch   # or minor / major
-```
+On pushes to `main`, `publish.yml` validates release intent using
+`.github/release-policy.json`. When a version increases, CI creates an annotated
+`vX.Y.Z` tag, verifies the exact tagged commit, and publishes the built package
+with npm provenance. It creates the GitHub Release after npm succeeds. On retry,
+an existing npm version is accepted only when its SHA-512 integrity matches the
+newly packed artifact. Use **Re-run failed jobs** to retry publication.
 
-Run this on a clean task branch from `main`, after filling `[Unreleased]`. It prepares
-`packages/ui/package.json`, the lockfile and the versioned changelog section. Review and
-commit these changes, then open a PR to `main`. It does not commit, tag or push.
-
-After an approved version bump merges, `.github/workflows/release-tag.yml` creates an
-annotated tag on that exact commit using the shared release App. A merge without a bump,
-including the initial migration, creates no tag. The contract is `.github/release-policy.json`.
-The organization must provision `RELEASE_APP_ID` and `RELEASE_APP_PRIVATE_KEY` and activate
-the selected repository and immutable tag protections through `github-config` first.
-
-The existing `.github/workflows/publish.yml` keeps its npm trusted publisher identity and
-publishes npm before the GitHub Release. Rerun the failed tag run after fixing a transient
-failure: an existing npm artifact is accepted only when its name, version and archive
-integrity match. Registry errors or a different archive fail explicitly. Never move a tag
-or bump again to repair a partial publication. Investigate non-reproducible archives before
-resuming. GitHub Release notes use the version's changelog section.
+Release-please reconciles after successful publication and on ordinary pushes.
+It opens or updates a release PR with the package version, root changelog and
+release manifest. The PR squash-merges after the required checks pass. Keep the
+private workspace root at `0.0.0`. CI owns release tags.
 
 ## License & Attribution
 

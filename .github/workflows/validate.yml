@@ -21,8 +21,6 @@ jobs:
         with:
           node-version: 22
 
-      - run: node --test scripts/release-utils.test.cjs
-      - run: bash scripts/tests/release.sh
       - run: pnpm install --frozen-lockfile
       - run: pnpm build
       - run: pnpm lint

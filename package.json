@@ -13,7 +13,6 @@
     "build": "turbo run build",
     "lint": "turbo run lint",
     "test": "turbo run test",
-    "release": "bash scripts/release.sh",
     "test:browser": "playwright test"
   },
   "keywords": [
