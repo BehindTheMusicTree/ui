@@ -37,9 +37,5 @@ jobs:
     steps:
       - name: Require build, lint and tests to pass
         env:
-          BUILD_RESULT: ${{ needs.build.result }}
-        run: |
-          if [ "$BUILD_RESULT" != "success" ]; then
-            echo "build result: $BUILD_RESULT" >&2
-            exit 1
-          fi
+          NEEDS: ${{ toJSON(needs) }}
+        run: jq -e 'all(.[]; .result == "success")' <<<"$NEEDS"
