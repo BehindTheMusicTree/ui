@@ -28,3 +28,18 @@ jobs:
 
       - run: pnpm exec playwright install --with-deps chromium
       - run: pnpm test:browser
+
+  tests-success:
+    name: Tests success
+    needs: build
+    if: always()
+    runs-on: ubuntu-24.04
+    steps:
+      - name: Require build, lint and tests to pass
+        env:
+          BUILD_RESULT: ${{ needs.build.result }}
+        run: |
+          if [ "$BUILD_RESULT" != "success" ]; then
+            echo "build result: $BUILD_RESULT" >&2
+            exit 1
+          fi
